@@ -9,13 +9,13 @@ allPosts.sort((a, b) => new Date(b.data.date || '').getTime() - new Date(a.data.
 <BaseLayout title="Blog Archive — Flip Phillips" description="All 140 posts and articles spanning graphics, perception, folklore, and research.">
   <div class="py-6">
     <header class="mb-10 pb-6 border-b border-neutral-200 dark:border-neutral-800">
-      <span class="text-xs font-mono uppercase tracking-wider text-amber-600 dark:text-amber-400 font-semibold">
+      <span class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold">
         Chronological Archive
       </span>
       <h1 class="text-3xl md:text-4xl font-serif font-bold text-neutral-900 dark:text-neutral-100 mt-1">
         Blog & Essays
       </h1>
-      <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-2">
+      <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-2 font-sans">
         {allPosts.length} posts spanning computer graphics, vision science, haptics, software experiments, and history.
       </p>
     </header>
@@ -37,14 +37,14 @@ allPosts.sort((a, b) => new Date(b.data.date || '').getTime() - new Date(a.data.
               )}
             </div>
 
-            <h2 class="text-xl font-serif font-bold text-neutral-900 dark:text-neutral-100 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+            <h2 class="text-xl font-serif font-bold text-neutral-900 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
               <a href={`/blog/${post.data.slug || post.id.replace(/\.md$/, '')}`}>
                 {post.data.title}
               </a>
             </h2>
 
             {post.data.excerpt && (
-              <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-300 line-clamp-2 leading-relaxed">
+              <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-300 line-clamp-2 leading-relaxed font-sans">
                 {post.data.excerpt.replace(/\[Read More\].*$/, '')}
               </p>
             )}

@@ -23,15 +23,15 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
 
-    <!-- Google Fonts: Inter + Newsreader + JetBrains Mono -->
+    <!-- Google Fonts: IBM Plex Family (Sans, Serif, Mono) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Theme initialization script (prevents flash of wrong theme) -->
+    <!-- Theme initialization script -->
     <script is:inline>
       const theme = (() => {
         if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
@@ -49,7 +49,7 @@ const {
       }
     </script>
   </head>
-  <body class="bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 min-h-screen flex flex-col antialiased selection:bg-amber-200 dark:selection:bg-amber-900/60 selection:text-amber-900 dark:selection:text-amber-100 transition-colors">
+  <body class="bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100 min-h-screen flex flex-col antialiased selection:bg-blue-100 dark:selection:bg-blue-900/60 selection:text-blue-950 dark:selection:text-blue-100 transition-colors font-sans">
     <Header />
     <main class="flex-grow max-w-5xl w-full mx-auto px-6 py-10">
       <slot />
@@ -65,7 +65,7 @@ const {
         mermaid.initialize({
           startOnLoad: false,
           theme: isDark ? 'dark' : 'neutral',
-          fontFamily: 'Inter, sans-serif'
+          fontFamily: 'IBM Plex Sans, sans-serif'
         });
         
         for (const el of mermaidBlocks) {

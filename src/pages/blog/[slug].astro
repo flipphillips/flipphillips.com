@@ -59,20 +59,20 @@ const formattedDate = post.data.date ? new Date(post.data.date).toLocaleDateStri
     <!-- Content Body with Markdown / Typography -->
     <div class="prose prose-neutral dark:prose-invert prose-lg max-w-none font-sans
       prose-headings:font-serif prose-headings:font-bold prose-headings:tracking-tight
-      prose-a:text-amber-600 dark:prose-a:text-amber-400 prose-a:no-underline hover:prose-a:underline
+      prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline
       prose-img:rounded-xl prose-img:shadow-md prose-img:my-6
-      prose-blockquote:border-l-amber-500 prose-blockquote:font-serif prose-blockquote:italic
+      prose-blockquote:border-l-blue-500 prose-blockquote:font-serif prose-blockquote:italic
       prose-pre:bg-neutral-900 prose-pre:text-neutral-100 prose-pre:rounded-xl">
       <Content />
     </div>
 
     <!-- Navigation footer -->
-    <div class="mt-16 pt-8 border-t border-neutral-200 dark:border-neutral-800 flex justify-between items-center text-sm">
-      <a href="/blog" class="font-medium text-amber-600 dark:text-amber-400 hover:underline">
+    <div class="mt-16 pt-8 border-t border-neutral-200 dark:border-neutral-800 flex justify-between items-center text-sm font-sans">
+      <a href="/blog" class="font-medium text-blue-600 dark:text-blue-400 hover:underline">
         &larr; Back to all posts
       </a>
       {post.data.isFolklore && (
-        <a href="/folklore" class="font-medium text-amber-600 dark:text-amber-400 hover:underline">
+        <a href="/folklore" class="font-medium text-blue-600 dark:text-blue-400 hover:underline">
           More Folklore stories &rarr;
         </a>
       )}

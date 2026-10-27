@@ -10,16 +10,16 @@ pubs.sort((a, b) => new Date(b.data.date || '').getTime() - new Date(a.data.date
 <BaseLayout title="Publications & Research — Flip Phillips" description="Scientific publications, preprints, and conference proceedings in human perception, graphics, and motion.">
   <div class="py-6">
     <header class="mb-10 pb-6 border-b border-neutral-200 dark:border-neutral-800">
-      <span class="text-xs font-mono uppercase tracking-wider text-amber-600 dark:text-amber-400 font-semibold">
+      <span class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold">
         Research Output
       </span>
       <h1 class="text-3xl md:text-4xl font-serif font-bold text-neutral-900 dark:text-neutral-100 mt-1">
         Publications & Research
       </h1>
-      <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-2 max-w-2xl">
+      <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-2 max-w-2xl font-sans">
         Articles in <em>ACM Transactions on Applied Perception</em>, <em>Vision Research</em>, <em>Experimental Brain Research</em>, and conferences across VSS and SIGGRAPH.
       </p>
-      <div class="mt-4 flex flex-wrap gap-3">
+      <div class="mt-4 flex flex-wrap gap-3 font-mono">
         <a
           href="/pubs/Flip%20Phillips%20External%20CV.pdf"
           target="_blank"
@@ -47,14 +47,14 @@ pubs.sort((a, b) => new Date(b.data.date || '').getTime() - new Date(a.data.date
         return (
           <article class="py-6 first:pt-0 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
             <div class="max-w-3xl">
-              <h2 class="text-lg font-serif font-bold text-neutral-900 dark:text-neutral-100 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
+              <h2 class="text-lg font-serif font-bold text-neutral-900 dark:text-neutral-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                 <a href={`/blog/${pub.data.slug || pub.id.replace(/\.md$/, '')}`}>
                   {pub.data.title}
                 </a>
               </h2>
 
               {pub.data.excerpt && (
-                <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-300 line-clamp-3 leading-relaxed">
+                <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-300 line-clamp-3 leading-relaxed font-sans">
                   {pub.data.excerpt.replace(/\[Read More\].*$/, '')}
                 </p>
               )}

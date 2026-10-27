@@ -8,7 +8,7 @@ interface Props {
   featuredImage?: string;
 }
 
-const { title, date, slug, excerpt, tags = [], featuredImage } = Astro.props;
+const { title, date, slug, excerpt, tags = [] } = Astro.props;
 
 const formattedDate = new Date(date).toLocaleDateString('en-US', {
   year: 'numeric',
@@ -17,16 +17,16 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
 });
 ---
 
-<article class="group relative flex flex-col justify-between p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/60 hover:border-amber-500/50 dark:hover:border-amber-500/50 hover:shadow-lg transition-all duration-200">
+<article class="group relative flex flex-col justify-between p-6 rounded-2xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900/60 hover:border-blue-500/40 dark:hover:border-blue-500/40 hover:shadow-lg transition-all duration-200">
   <div>
     <div class="flex items-center justify-between text-xs text-neutral-400 dark:text-neutral-500 mb-3 font-mono">
       <time datetime={date}>{formattedDate}</time>
-      <span class="px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 font-sans font-medium text-[11px]">
+      <span class="px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-sans font-medium text-[11px]">
         Folklore
       </span>
     </div>
 
-    <h3 class="text-lg font-serif font-bold text-neutral-900 dark:text-neutral-100 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors leading-snug">
+    <h3 class="text-lg font-serif font-bold text-neutral-900 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
       <a href={`/blog/${slug}`} class="focus:outline-none">
         <span class="absolute inset-0" aria-hidden="true"></span>
         {title}
@@ -40,15 +40,15 @@ const formattedDate = new Date(date).toLocaleDateString('en-US', {
     )}
   </div>
 
-  <div class="mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-800/60 flex items-center justify-between">
+  <div class="mt-4 pt-4 border-t border-neutral-100 dark:border-neutral-800/60 flex items-center justify-between font-mono">
     <div class="flex flex-wrap gap-1.5">
       {tags.slice(0, 3).map(tag => (
-        <span class="text-[11px] font-mono text-neutral-500 dark:text-neutral-400">
+        <span class="text-[11px] text-neutral-500 dark:text-neutral-400">
           #{tag}
         </span>
       ))}
     </div>
-    <span class="text-xs font-semibold text-amber-600 dark:text-amber-400 group-hover:translate-x-0.5 transition-transform">
+    <span class="text-xs font-semibold text-blue-600 dark:text-blue-400 group-hover:translate-x-0.5 transition-transform font-sans">
       Read &rarr;
     </span>
   </div>
