@@ -53,12 +53,12 @@ flowchart TD
 ```mermaid
 sequenceDiagram
     autonumber
-    participant Actor as Stage / Performer
+    actor Performer as Stage / Performer
     participant Sensors as ChumpCam / OpenVolCap
     participant Engine as Unreal Engine / LED Wall
     participant Camera as Cinema Camera
     
-    Actor->>Sensors: Motion & Volume Sampling
+    Performer->>Sensors: Motion & Volume Sampling
     Sensors->>Engine: Low-latency Tracking Data (OSC/FreeD)
     Engine->>Engine: Compute Parallax & Frustum
     Engine->>Camera: Render In-Camera Visual Effects (ICVFX)
