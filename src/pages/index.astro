@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import RandomBanner from '../components/RandomBanner.astro';
 import ModelViewer3D from '../components/ModelViewer3D.astro';
 import FolkloreCard from '../components/FolkloreCard.astro';
 import { getCollection } from 'astro:content';
@@ -19,30 +20,8 @@ const recentPubs = (publicationPosts.length > 0 ? publicationPosts : allPosts).s
 ---
 
 <BaseLayout>
-  <!-- Historic Header Banner (Gibson's Feelies) -->
-  <div class="pt-6 pb-2">
-    <div class="relative overflow-hidden rounded-2xl border border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-50/80 dark:bg-neutral-900/50 p-4 md:p-6 transition-all">
-      <div class="flex items-center justify-center">
-        <img
-          src="/images/uploads/2016/09/feelies.png"
-          alt="Gibson's Feelies tactile stimuli lineup"
-          class="w-full max-h-44 md:max-h-52 object-contain filter drop-shadow-xs select-none"
-          loading="eager"
-        />
-      </div>
-      <div class="mt-3 pt-2 border-t border-neutral-200/60 dark:border-neutral-800/60 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs font-mono text-neutral-500 dark:text-neutral-400">
-        <span class="tracking-tight">
-          Gibson’s Feelies &bull; Tactile &amp; Visual Stimuli (Scans: Phillips &amp; Egan)
-        </span>
-        <a
-          href="/software"
-          class="inline-flex items-center gap-1 font-sans text-xs font-medium text-blue-600 dark:text-blue-400 hover:underline"
-        >
-          Explore 3D Datasets &amp; Glavens &rarr;
-        </a>
-      </div>
-    </div>
-  </div>
+  <!-- Dynamic Historical Artifact Banner -->
+  <RandomBanner />
 
   <!-- Hero Section -->
   <section class="py-8 md:py-12 border-b border-neutral-200 dark:border-neutral-800">

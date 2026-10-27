@@ -1,0 +1,288 @@
+---
+// Curated historical artifacts, research stimuli, and archival media
+const bannerItems = [
+  {
+    src: "/images/uploads/2016/09/feelies.png",
+    alt: "Gibson’s Feelies",
+    title: "Gibson’s Feelies (Laser Scans: Phillips & Egan)",
+    subtitle: "Historic 1960s bakelite tactile stimuli scanned with NextEngine laser for haptic shape experiments.",
+    link: "/software",
+    linkText: "Explore 3D Datasets"
+  },
+  {
+    src: "/images/uploads/2026/02/Jump1.jpeg",
+    alt: "Luxo Jr. Reference Stunt",
+    title: "1980s Reference Footage for Luxo Jr.",
+    subtitle: "Flip jumping over a trash can in the Pixar parking lot to study lamp-hopping momentum and squash & stretch.",
+    link: "/folklore/i-was-a-teenage-well-22-yr-old-model-for-a-lamp",
+    linkText: "Read Story"
+  },
+  {
+    src: "/images/uploads/2026/01/IMG_2357.jpeg",
+    alt: "Hayao Miyazaki Cat Bus",
+    title: "Hayao Miyazaki’s Visit to Pixar",
+    subtitle: "A gift from Miyazaki to the early animation group: the talking Seiko Pyramid Cat Bus clock.",
+    link: "/folklore/hayao-miyazaki-gave-me-this-cat-bus-no-you-cant-have-it",
+    linkText: "Read Story"
+  },
+  {
+    src: "/images/uploads/2024/05/2024-04-08-0183-e1737410414330.png",
+    alt: "MacRenderMan Diskettes",
+    title: "MacRenderMan 1.0 (Pixar, 1989)",
+    subtitle: "Original release floppies for the Macintosh II era of photorealistic 3D rendering.",
+    link: "/folklore/macrenderman",
+    linkText: "Read Story"
+  },
+  {
+    src: "/images/uploads/2019/12/Pixar-Business-Card.png",
+    alt: "Pixar Business Card",
+    title: "Animation Scientist — Pixar Animation Studios",
+    subtitle: "Flip’s original business card from the pioneering Point Richmond studio days.",
+    link: "/about",
+    linkText: "About Flip"
+  },
+  {
+    src: "/images/uploads/2019/05/SceneBigGlaven3_0020.jpg",
+    alt: "Glaven 3D Render",
+    title: "Glavens — Procedural 3D Stimuli",
+    subtitle: "Procedural shapes parameterized by frequency and complexity for vision and haptic tests.",
+    link: "/software",
+    linkText: "View Stimuli"
+  },
+  {
+    src: "/images/uploads/2014/06/MeshLab_64bit_v1_3_3-e1533176619924.png",
+    alt: "Glaven Curvature in MeshLab",
+    title: "Glaven Curvature & Differential Geometry",
+    subtitle: "Evaluating Gaussian and mean curvature distributions on 3D printed psychophysics models.",
+    link: "/software",
+    linkText: "View Geometry"
+  },
+  {
+    src: "/images/uploads/2018/08/ComputerPictures1987.png",
+    alt: "Computer Pictures Magazine Jan 1987",
+    title: "Computer Pictures Magazine (January 1987)",
+    subtitle: "Early computer graphics coverage from Ohio State University CGRG and early Pixar.",
+    link: "/folklore/computer-pictures-magazine-jan-1987",
+    linkText: "Read Story"
+  },
+  {
+    src: "/images/uploads/2024/07/MacPascal8.png",
+    alt: "Turdpaint in MacPascal",
+    title: "Turdpaint — MacPascal Graphics (1985)",
+    subtitle: "Algorithmic drawing and interactive graphics experimentation on early Macintosh hardware.",
+    link: "/folklore/turdpaint",
+    linkText: "Read Story"
+  },
+  {
+    src: "/images/uploads/2025/07/IMG_2605.jpeg",
+    alt: "ChumpCam Hardware",
+    title: "The ChumpCam Tracking Prototype",
+    subtitle: "Open-source camera tracking and motion sampling hardware for virtual production stages.",
+    link: "/folklore/a-first-look-at-the-chumpcam",
+    linkText: "Read Story"
+  },
+  {
+    src: "/images/uploads/2019/11/IMG_9087-e1572892782735.jpeg",
+    alt: "WTC Mathematica Championship Belt",
+    title: "Wolfram Technology Conference Live-Coding Belt",
+    subtitle: "The championship belt from the high-pressure Mathematica live coding competition.",
+    link: "/folklore/wtc-mathematica-live-coding-championship",
+    linkText: "Read Story"
+  },
+  {
+    src: "/images/uploads/2013/10/PeteTrial14Traj.jpg",
+    alt: "Fencing Eyetracking Trajectory",
+    title: "Anticipation in Sabre Fencing",
+    subtitle: "Eyetracking gaze fixation trajectories during high-speed elite sabre fencing attacks.",
+    link: "/folklore/anticipation-of-sabre-fencing-attacks",
+    linkText: "Read Story"
+  },
+  {
+    src: "/images/uploads/2018/08/AnimatioGroup.png",
+    alt: "Animation Magazine Cover",
+    title: "Animation Magazine — Early CG Pioneers",
+    subtitle: "Cover feature on the studio teams building the foundations of digital filmmaking.",
+    link: "/folklore/animation-magazine",
+    linkText: "Read Story"
+  },
+  {
+    src: "/images/uploads/2012/12/Glaven13.png",
+    alt: "Glaven #13",
+    title: "Glaven #13 — 1 JND Perceptual Step",
+    subtitle: "Calibrated 3D shape discrimination stimulus stepped in Just Noticeable Difference intervals.",
+    link: "/software",
+    linkText: "Download 3D STL"
+  },
+  {
+    src: "/images/uploads/2016/11/OSU-Hospital-ID.png",
+    alt: "OSU Hospital ID",
+    title: "Ohio State University Hospitals — Radiology & Imaging",
+    subtitle: "Early work with functional magnetic resonance, medical volume rendering, and EEG.",
+    link: "/folklore",
+    linkText: "Folklore Archive"
+  },
+  {
+    src: "/images/uploads/2018/05/Screen-Shot-2018-05-16-at-3.08.47-PM.png",
+    alt: "3D Shape Metrics & Contours",
+    title: "Surface Orientation & Boundary Deformation",
+    subtitle: "Mathematical modeling of shape scission, highlight contours, and perceptual segmentation.",
+    link: "/folklore/shape-metrics",
+    linkText: "Read Story"
+  },
+  {
+    src: "/images/uploads/2013/10/glavens.jpg",
+    alt: "The Glavens Lineup",
+    title: "The Glavens (Named after Prof. John Frink)",
+    subtitle: "A family of 3D stimuli spanning smooth ellipsoid to high-frequency perturbation.",
+    link: "/software",
+    linkText: "Explore Glavens"
+  },
+  {
+    src: "/images/uploads/2013/10/img264.jpg",
+    alt: "TAPASI Scientific Archive",
+    title: "The Archives of Potentially Amusing Scientific Images",
+    subtitle: "TAPASI — Curated visual oddities and curiosities from decades of peer-reviewed perception papers.",
+    link: "/folklore/the-archives-of-potentially-amusing-scientific-images-tapasi",
+    linkText: "Read Story"
+  }
+];
+
+// Pick initial server-rendered item (Feelies is default for static prerender)
+const initialItem = bannerItems[0];
+---
+
+<div class="pt-6 pb-2" id="random-banner-container">
+  <div class="relative overflow-hidden rounded-2xl border border-neutral-200/80 dark:border-neutral-800/80 bg-neutral-100/70 dark:bg-neutral-900/60 transition-all shadow-xs">
+    
+    <!-- Image Stage -->
+    <div class="relative w-full h-52 sm:h-64 md:h-72 flex items-center justify-center p-4 md:p-6 overflow-hidden">
+      <img
+        id="banner-image"
+        src={initialItem.src}
+        alt={initialItem.alt}
+        class="max-h-full max-w-full object-contain filter drop-shadow-sm select-none transition-opacity duration-300"
+        loading="eager"
+      />
+    </div>
+
+    <!-- Bottom Caption & Controls Bar -->
+    <div class="px-4 py-3 bg-white/80 dark:bg-neutral-900/90 border-t border-neutral-200/70 dark:border-neutral-800/70 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+      
+      <!-- Text details -->
+      <div class="flex-grow min-w-0 pr-2">
+        <div class="flex items-center gap-2">
+          <span id="banner-counter" class="font-mono text-[11px] text-blue-600 dark:text-blue-400 font-semibold uppercase tracking-wider">
+            Artifact 1 of {bannerItems.length}
+          </span>
+          <span class="text-neutral-300 dark:text-neutral-700">&bull;</span>
+          <h3 id="banner-title" class="font-medium text-neutral-900 dark:text-neutral-100 truncate">
+            {initialItem.title}
+          </h3>
+        </div>
+        <p id="banner-subtitle" class="text-neutral-500 dark:text-neutral-400 text-[11px] truncate mt-0.5">
+          {initialItem.subtitle}
+        </p>
+      </div>
+
+      <!-- Controls & Link -->
+      <div class="flex items-center justify-between sm:justify-end gap-2 shrink-0 pt-1 sm:pt-0 border-t sm:border-t-0 border-neutral-100 dark:border-neutral-800">
+        <a
+          id="banner-link"
+          href={initialItem.link}
+          class="font-medium text-blue-600 dark:text-blue-400 hover:underline mr-2"
+        >
+          <span id="banner-link-text">{initialItem.linkText}</span> &rarr;
+        </a>
+
+        <div class="flex items-center gap-1 font-mono">
+          <button
+            id="banner-prev"
+            class="px-2 py-1 rounded-md border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 transition-colors cursor-pointer"
+            title="Previous artifact"
+            aria-label="Previous artifact"
+          >
+            &larr;
+          </button>
+
+          <button
+            id="banner-random"
+            class="px-2.5 py-1 rounded-md border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 transition-colors flex items-center gap-1 cursor-pointer font-sans text-xs"
+            title="Show random artifact"
+            aria-label="Show random artifact"
+          >
+            <span>🎲</span>
+            <span class="hidden md:inline">Shuffle</span>
+          </button>
+
+          <button
+            id="banner-next"
+            class="px-2 py-1 rounded-md border border-neutral-200 dark:border-neutral-700 hover:bg-neutral-100 dark:hover:bg-neutral-800 text-neutral-700 dark:text-neutral-300 transition-colors cursor-pointer"
+            title="Next artifact"
+            aria-label="Next artifact"
+          >
+            &rarr;
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ bannerItems }}>
+  let currentIndex = 0;
+  const imgEl = document.getElementById('banner-image');
+  const titleEl = document.getElementById('banner-title');
+  const subEl = document.getElementById('banner-subtitle');
+  const counterEl = document.getElementById('banner-counter');
+  const linkEl = document.getElementById('banner-link');
+  const linkTextEl = document.getElementById('banner-link-text');
+
+  function updateBanner(idx, animate = true) {
+    if (!imgEl) return;
+    currentIndex = (idx + bannerItems.length) % bannerItems.length;
+    const item = bannerItems[currentIndex];
+
+    if (animate) {
+      imgEl.style.opacity = '0.3';
+      setTimeout(() => {
+        imgEl.src = item.src;
+        imgEl.alt = item.alt;
+        imgEl.style.opacity = '1';
+      }, 150);
+    } else {
+      imgEl.src = item.src;
+      imgEl.alt = item.alt;
+    }
+
+    if (titleEl) titleEl.textContent = item.title;
+    if (subEl) subEl.textContent = item.subtitle;
+    if (counterEl) counterEl.textContent = `Artifact ${currentIndex + 1} of ${bannerItems.length}`;
+    if (linkEl && linkTextEl) {
+      linkEl.href = item.link;
+      linkTextEl.textContent = item.linkText;
+    }
+  }
+
+  // Randomize on initial load in browser so each page visit shows a different artifact
+  const initialRandomIndex = Math.floor(Math.random() * bannerItems.length);
+  if (initialRandomIndex !== 0) {
+    updateBanner(initialRandomIndex, false);
+  }
+
+  document.getElementById('banner-prev')?.addEventListener('click', () => {
+    updateBanner(currentIndex - 1);
+  });
+
+  document.getElementById('banner-next')?.addEventListener('click', () => {
+    updateBanner(currentIndex + 1);
+  });
+
+  document.getElementById('banner-random')?.addEventListener('click', () => {
+    let newIdx = Math.floor(Math.random() * bannerItems.length);
+    if (newIdx === currentIndex) {
+      newIdx = (newIdx + 1) % bannerItems.length;
+    }
+    updateBanner(newIdx);
+  });
+</script>
