@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts');
+const pubs = allPosts.filter(p => p.data.isPublication || p.data.categories.includes('Publications') || p.data.tags.includes('publication') || p.data.tags.includes('research'));
+pubs.sort((a, b) => new Date(b.data.date || '').getTime() - new Date(a.data.date || '').getTime());
+---
+
+<BaseLayout title="Publications & Research — Flip Phillips" description="Scientific publications, preprints, and conference proceedings in human perception, graphics, and motion.">
+  <div class="py-6">
+    <header class="mb-10 pb-6 border-b border-neutral-200 dark:border-neutral-800">
+      <span class="text-xs font-mono uppercase tracking-wider text-amber-600 dark:text-amber-400 font-semibold">
+        Research Output
+      </span>
+      <h1 class="text-3xl md:text-4xl font-serif font-bold text-neutral-900 dark:text-neutral-100 mt-1">
+        Publications & Research
+      </h1>
+      <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-2 max-w-2xl">
+        Articles in <em>ACM Transactions on Applied Perception</em>, <em>Vision Research</em>, <em>Experimental Brain Research</em>, and conferences across VSS and SIGGRAPH.
+      </p>
+      <div class="mt-4 flex flex-wrap gap-3">
+        <a
+          href="/pubs/Flip%20Phillips%20External%20CV.pdf"
+          target="_blank"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
+        >
+          📄 Download Full CV (PDF) &rarr;
+        </a>
+        <a
+          href="https://scholar.google.com/citations?user=flipphillips"
+          target="_blank"
+          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
+        >
+          🎓 Google Scholar Profile &rarr;
+        </a>
+      </div>
+    </header>
+
+    <div class="divide-y divide-neutral-200 dark:divide-neutral-800">
+      {pubs.map(pub => {
+        const formattedDate = pub.data.date ? new Date(pub.data.date).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short'
+        }) : '';
+
+        return (
+          <article class="py-6 first:pt-0 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
+            <div class="max-w-3xl">
+              <h2 class="text-lg font-serif font-bold text-neutral-900 dark:text-neutral-100 hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
+                <a href={`/blog/${pub.data.slug || pub.id.replace(/\.md$/, '')}`}>
+                  {pub.data.title}
+                </a>
+              </h2>
+
+              {pub.data.excerpt && (
+                <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-300 line-clamp-3 leading-relaxed">
+                  {pub.data.excerpt.replace(/\[Read More\].*$/, '')}
+                </p>
+              )}
+
+              {pub.data.tags && pub.data.tags.length > 0 && (
+                <div class="mt-3 flex flex-wrap gap-1.5 text-xs font-mono text-neutral-400 dark:text-neutral-500">
+                  {pub.data.tags.map(t => (
+                    <span class="px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800/80 text-[11px]">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div class="text-xs font-mono text-neutral-400 dark:text-neutral-500 whitespace-nowrap">
+              {formattedDate}
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</BaseLayout>
