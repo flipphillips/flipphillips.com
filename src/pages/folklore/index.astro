@@ -1,37 +1,143 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import FolkloreCard from '../../components/FolkloreCard.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('posts');
-const folklorePosts = allPosts.filter(p => p.data.isFolklore || p.data.categories.includes('Folklore') || p.data.tags.includes('folklore'));
-folklorePosts.sort((a, b) => new Date(b.data.date || '').getTime() - new Date(a.data.date || '').getTime());
+// Sort by date descending
+allPosts.sort((a, b) => new Date(b.data.date || '').getTime() - new Date(a.data.date || '').getTime());
+
+const folkloreCount = allPosts.filter(p => p.data.isFolklore || p.data.categories.includes('Folklore') || p.data.tags.includes('folklore')).length;
 ---
 
-<BaseLayout title="Folklore & Archival Stories — Flip Phillips" description="Personal chronicles from the early days of computer graphics, Pixar, Ohio State CGRG, and beyond.">
+<BaseLayout title="Folklore & Dispatches — Flip Phillips" description="The unified blog, archival oral histories, and research notes of Flip Phillips.">
   <div class="py-6">
-    <header class="mb-12 max-w-2xl">
+    <header class="mb-10 pb-6 border-b border-neutral-200 dark:border-neutral-800">
       <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 mb-4">
-        <span>📖 Archival Oral History</span>
+        <span>📖 Chronicles, Essays & Research</span>
       </div>
       <h1 class="text-4xl md:text-5xl font-serif font-bold text-neutral-900 dark:text-neutral-50 tracking-tight leading-tight">
-        Folklore & Chronicles
+        Folklore & Dispatches
       </h1>
-      <p class="mt-4 text-base text-neutral-600 dark:text-neutral-300 leading-relaxed font-sans">
-        Pioneering computer graphics wasn't just algorithms and framebuffers — it was jumping over trash cans in parking lots for <em>Luxo Jr.</em> reference footage, drawing tools on the Pixar Image Computer, receiving hand-delivered Cat Buses from Hayao Miyazaki, and answering phone calls from David Bowie looking for ideas.
+      <p class="mt-4 text-base text-neutral-600 dark:text-neutral-300 leading-relaxed font-sans max-w-2xl">
+        Firsthand oral histories from early computer animation at Pixar and Ohio State CGRG, mixed with research dispatches on perception, haptics, software experiments, and music.
       </p>
+
+      <!-- Filter Controls -->
+      <div class="mt-6 flex flex-wrap items-center gap-2 font-mono text-xs" id="filter-container">
+        <button data-filter="all" class="filter-btn px-3 py-1.5 rounded-lg bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900 font-medium transition-colors cursor-pointer">
+          All ({allPosts.length})
+        </button>
+        <button data-filter="folklore" class="filter-btn px-3 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 font-medium transition-colors cursor-pointer">
+          ✦ Archival Folklore ({folkloreCount})
+        </button>
+        <button data-filter="perception" class="filter-btn px-3 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 font-medium transition-colors cursor-pointer">
+          Perception & Vision
+        </button>
+        <button data-filter="graphics" class="filter-btn px-3 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 font-medium transition-colors cursor-pointer">
+          Graphics & Animation
+        </button>
+        <button data-filter="software" class="filter-btn px-3 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 font-medium transition-colors cursor-pointer">
+          Code & Tools
+        </button>
+      </div>
     </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {folklorePosts.map(post => (
-        <FolkloreCard
-          title={post.data.title}
-          date={post.data.date || ''}
-          slug={post.data.slug || post.id.replace(/\.md$/, '')}
-          excerpt={post.data.excerpt}
-          tags={post.data.tags}
-        />
-      ))}
+    <!-- Post list -->
+    <div class="space-y-8" id="posts-list">
+      {allPosts.map(post => {
+        const formattedDate = post.data.date ? new Date(post.data.date).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric'
+        }) : '';
+
+        const isFolklore = post.data.isFolklore || post.data.categories.includes('Folklore') || post.data.tags.includes('folklore');
+        const tagsJoined = (post.data.tags || []).join(' ').toLowerCase();
+        const catsJoined = (post.data.categories || []).join(' ').toLowerCase();
+        const titleLower = post.data.title.toLowerCase();
+
+        let filterCategories = ['all'];
+        if (isFolklore) filterCategories.push('folklore');
+        if (tagsJoined.includes('vision') || tagsJoined.includes('perception') || tagsJoined.includes('haptic') || titleLower.includes('perception') || titleLower.includes('vision')) {
+          filterCategories.push('perception');
+        }
+        if (tagsJoined.includes('animation') || tagsJoined.includes('pixar') || tagsJoined.includes('graphics') || tagsJoined.includes('cgrg') || titleLower.includes('animation') || titleLower.includes('render')) {
+          filterCategories.push('graphics');
+        }
+        if (tagsJoined.includes('software') || tagsJoined.includes('hardware') || tagsJoined.includes('mathematica') || tagsJoined.includes('arduino') || tagsJoined.includes('tool')) {
+          filterCategories.push('software');
+        }
+
+        return (
+          <article
+            class="post-item group pb-8 border-b border-neutral-100 dark:border-neutral-800/80 last:border-0 transition-opacity"
+            data-categories={filterCategories.join(' ')}
+          >
+            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-1 text-xs text-neutral-400 font-mono mb-2">
+              <div class="flex items-center gap-2">
+                <time datetime={post.data.date}>{formattedDate}</time>
+                {isFolklore && (
+                  <span class="px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-sans font-medium text-[10px]">
+                    ✦ Archival Story
+                  </span>
+                )}
+              </div>
+              {post.data.categories && post.data.categories.length > 0 && (
+                <span class="text-neutral-500 font-sans">{post.data.categories.join(' &bull; ')}</span>
+              )}
+            </div>
+
+            <h2 class="text-xl font-serif font-bold text-neutral-900 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+              <a href={`/folklore/${post.data.slug || post.id.replace(/\.md$/, '')}`}>
+                {post.data.title}
+              </a>
+            </h2>
+
+            {post.data.excerpt && (
+              <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-300 line-clamp-2 leading-relaxed font-sans">
+                {post.data.excerpt.replace(/\[Read More\].*$/, '')}
+              </p>
+            )}
+
+            {post.data.tags && post.data.tags.length > 0 && (
+              <div class="mt-3 flex flex-wrap gap-2 text-xs font-mono text-neutral-400 dark:text-neutral-500">
+                {post.data.tags.slice(0, 5).map(tag => (
+                  <span>#{tag}</span>
+                ))}
+              </div>
+            )}
+          </article>
+        );
+      })}
     </div>
   </div>
 </BaseLayout>
+
+<script>
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const postItems = document.querySelectorAll<HTMLElement>('.post-item');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter || 'all';
+
+      // Update button styling
+      filterBtns.forEach(b => {
+        b.classList.remove('bg-neutral-900', 'text-white', 'dark:bg-neutral-100', 'dark:text-neutral-900');
+        b.classList.add('bg-neutral-100', 'dark:bg-neutral-800', 'text-neutral-600', 'dark:text-neutral-300');
+      });
+      btn.classList.remove('bg-neutral-100', 'dark:bg-neutral-800', 'text-neutral-600', 'dark:text-neutral-300');
+      btn.classList.add('bg-neutral-900', 'text-white', 'dark:bg-neutral-100', 'dark:text-neutral-900');
+
+      // Filter posts
+      postItems.forEach(item => {
+        const cats = (item.dataset.categories || '').split(' ');
+        if (filter === 'all' || cats.includes(filter)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
