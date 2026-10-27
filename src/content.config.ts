@@ -12,6 +12,7 @@ const posts = defineCollection({
     tags: z.array(z.string()).default([]),
     isFolklore: z.boolean().default(false),
     isPublication: z.boolean().default(false),
+    featuredImage: z.string().optional(),
     excerpt: z.string().optional(),
   }),
 });

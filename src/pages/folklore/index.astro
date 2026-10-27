@@ -68,43 +68,64 @@ const folkloreCount = allPosts.filter(p => p.data.isFolklore || p.data.categorie
           filterCategories.push('software');
         }
 
+        const imgMatch = post.body?.match(/!\[.*?\]\((.*?)\)/);
+        const postImage = post.data.featuredImage || (imgMatch ? imgMatch[1] : null);
+
         return (
           <article
-            class="post-item group pb-8 border-b border-neutral-100 dark:border-neutral-800/80 last:border-0 transition-opacity"
+            class="post-item group pb-8 border-b border-neutral-100 dark:border-neutral-800/80 last:border-0 transition-opacity flex flex-col md:flex-row md:items-start justify-between gap-6"
             data-categories={filterCategories.join(' ')}
           >
-            <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-1 text-xs text-neutral-400 font-mono mb-2">
-              <div class="flex items-center gap-2">
-                <time datetime={post.data.date}>{formattedDate}</time>
-                {isFolklore && (
-                  <span class="px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-sans font-medium text-[10px]">
-                    ✦ Archival Story
-                  </span>
+            <div class="flex-grow min-w-0">
+              <div class="flex flex-col md:flex-row md:items-baseline justify-between gap-1 text-xs text-neutral-400 font-mono mb-2">
+                <div class="flex items-center gap-2">
+                  <time datetime={post.data.date}>{formattedDate}</time>
+                  {isFolklore && (
+                    <span class="px-2 py-0.5 rounded-full bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-sans font-medium text-[10px]">
+                      ✦ Archival Story
+                    </span>
+                  )}
+                </div>
+                {post.data.categories && post.data.categories.length > 0 && (
+                  <span class="text-neutral-500 font-sans">{post.data.categories.join(' &bull; ')}</span>
                 )}
               </div>
-              {post.data.categories && post.data.categories.length > 0 && (
-                <span class="text-neutral-500 font-sans">{post.data.categories.join(' &bull; ')}</span>
+
+              <h2 class="text-xl font-serif font-bold text-neutral-900 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                <a href={`/folklore/${post.data.slug || post.id.replace(/\.md$/, '')}`}>
+                  {post.data.title}
+                </a>
+              </h2>
+
+              {post.data.excerpt && (
+                <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-300 line-clamp-2 leading-relaxed font-sans">
+                  {post.data.excerpt.replace(/\[Read More\].*$/, '')}
+                </p>
+              )}
+
+              {post.data.tags && post.data.tags.length > 0 && (
+                <div class="mt-3 flex flex-wrap gap-2 text-xs font-mono text-neutral-400 dark:text-neutral-500">
+                  {post.data.tags.slice(0, 5).map(tag => (
+                    <span>#{tag}</span>
+                  ))}
+                </div>
               )}
             </div>
 
-            <h2 class="text-xl font-serif font-bold text-neutral-900 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-              <a href={`/folklore/${post.data.slug || post.id.replace(/\.md$/, '')}`}>
-                {post.data.title}
+            {postImage && (
+              <a
+                href={`/folklore/${post.data.slug || post.id.replace(/\.md$/, '')}`}
+                class="shrink-0 w-full sm:w-36 md:w-44 h-28 rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-800 border border-neutral-200/80 dark:border-neutral-800 block group-hover:opacity-95 transition-opacity"
+                tabindex="-1"
+                aria-hidden="true"
+              >
+                <img
+                  src={postImage}
+                  alt={post.data.title}
+                  class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
               </a>
-            </h2>
-
-            {post.data.excerpt && (
-              <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-300 line-clamp-2 leading-relaxed font-sans">
-                {post.data.excerpt.replace(/\[Read More\].*$/, '')}
-              </p>
-            )}
-
-            {post.data.tags && post.data.tags.length > 0 && (
-              <div class="mt-3 flex flex-wrap gap-2 text-xs font-mono text-neutral-400 dark:text-neutral-500">
-                {post.data.tags.slice(0, 5).map(tag => (
-                  <span>#{tag}</span>
-                ))}
-              </div>
             )}
           </article>
         );

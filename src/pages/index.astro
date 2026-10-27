@@ -145,15 +145,20 @@ const recentPubs = (publicationPosts.length > 0 ? publicationPosts : allPosts).s
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {featuredFolklore.map(post => (
-        <FolkloreCard
-          title={post.data.title}
-          date={post.data.date || ''}
-          slug={post.data.slug || post.id}
-          excerpt={post.data.excerpt}
-          tags={post.data.tags}
-        />
-      ))}
+      {featuredFolklore.map(post => {
+        const imgMatch = post.body?.match(/!\[.*?\]\((.*?)\)/);
+        const image = post.data.featuredImage || (imgMatch ? imgMatch[1] : null);
+        return (
+          <FolkloreCard
+            title={post.data.title}
+            date={post.data.date || ''}
+            slug={post.data.slug || post.id}
+            excerpt={post.data.excerpt}
+            tags={post.data.tags}
+            featuredImage={image}
+          />
+        );
+      })}
     </div>
   </section>
 
