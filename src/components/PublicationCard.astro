@@ -1,0 +1,113 @@
+---
+import type { Publication } from '../data/publications';
+
+interface Props {
+  pub: Publication;
+}
+
+const { pub } = Astro.props;
+
+const doiUrl = pub.doi ? (pub.doi.startsWith('http') ? pub.doi : `https://doi.org/${pub.doi}`) : null;
+---
+
+<article class="group relative flex flex-col justify-between p-6 rounded-2xl border border-neutral-200/80 dark:border-neutral-800/80 bg-white dark:bg-neutral-900/50 hover:border-blue-500/40 dark:hover:border-blue-500/40 hover:shadow-md transition-all">
+  <div class="flex flex-col md:flex-row md:items-start justify-between gap-6">
+    <div class="flex-grow min-w-0">
+      
+      <!-- Meta badges -->
+      <div class="flex items-center gap-2 text-xs font-mono mb-2.5">
+        <span class="px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/70 text-blue-700 dark:text-blue-300 font-semibold">
+          {pub.year}
+        </span>
+        <span class="px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-400 text-[11px]">
+          {pub.typeLabel}
+        </span>
+        {pub.highlight && (
+          <span class="px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 text-[11px] font-sans font-medium">
+            ✦ Selected Work
+          </span>
+        )}
+      </div>
+
+      <!-- Title -->
+      <h3 class="text-lg md:text-xl font-serif font-bold text-neutral-900 dark:text-neutral-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">
+        {doiUrl ? (
+          <a href={doiUrl} target="_blank" rel="noopener noreferrer">
+            {pub.title}
+          </a>
+        ) : (
+          pub.title
+        )}
+      </h3>
+
+      <!-- Authors -->
+      <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-300 font-sans leading-relaxed">
+        {pub.authors.map((author, idx) => {
+          const isFlip = author.includes('F Phillips') || author.includes('Phillips F') || author === 'F Phillips';
+          return (
+            <span>
+              {isFlip ? (
+                <strong class="font-semibold text-neutral-900 dark:text-neutral-100 underline decoration-blue-500/40 decoration-2">
+                  {author}
+                </strong>
+              ) : (
+                author
+              )}
+              {idx < pub.authors.length - 1 ? ', ' : ''}
+            </span>
+          );
+        })}
+      </p>
+
+      <!-- Venue & Citation -->
+      <p class="mt-1.5 text-xs text-neutral-500 dark:text-neutral-400 font-serif italic">
+        {pub.venue}
+        {pub.volume && `, vol. ${pub.volume}`}
+        {pub.issue && `, num. ${pub.issue}`}
+        {pub.pages && `, ${pub.pages}`}
+      </p>
+
+      <!-- Action Links -->
+      <div class="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-800/60 flex flex-wrap items-center gap-3 text-xs font-mono">
+        {doiUrl && (
+          <a
+            href={doiUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            <span>🔗</span>
+            <span>DOI: {pub.doi}</span>
+          </a>
+        )}
+
+        {pub.pdf ? (
+          <a
+            href={pub.pdf}
+            target="_blank"
+            class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900 hover:opacity-90 font-medium"
+          >
+            <span>📄</span>
+            <span>PDF</span>
+          </a>
+        ) : (
+          <span class="text-neutral-400 dark:text-neutral-500 text-[11px] italic font-sans">
+            (PDF available upon request)
+          </span>
+        )}
+      </div>
+
+    </div>
+
+    {pub.image && (
+      <div class="shrink-0 w-full sm:w-36 md:w-44 h-28 rounded-xl overflow-hidden bg-neutral-100 dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-800">
+        <img
+          src={pub.image}
+          alt={pub.title}
+          class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-300"
+          loading="lazy"
+        />
+      </div>
+    )}
+  </div>
+</article>

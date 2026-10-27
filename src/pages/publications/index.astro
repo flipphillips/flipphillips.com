@@ -1,81 +1,129 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import PublicationCard from '../../components/PublicationCard.astro';
+import { publications } from '../../data/publications';
 
-const allPosts = await getCollection('posts');
-const pubs = allPosts.filter(p => p.data.isPublication || p.data.categories.includes('Publications') || p.data.tags.includes('publication') || p.data.tags.includes('research'));
-pubs.sort((a, b) => new Date(b.data.date || '').getTime() - new Date(a.data.date || '').getTime());
+// Sort descending by year
+const sortedPubs = [...publications].sort((a, b) => b.year - a.year);
+
+const journalCount = sortedPubs.filter(p => p.type === 'journal').length;
+const confCount = sortedPubs.filter(p => p.type === 'conference').length;
+const highlightCount = sortedPubs.filter(p => p.highlight).length;
 ---
 
-<BaseLayout title="Publications & Research — Flip Phillips" description="Scientific publications, preprints, and conference proceedings in human perception, graphics, and motion.">
+<BaseLayout
+  title="Publications & Research — Flip Phillips"
+  description="Peer-reviewed scientific journal articles, conference proceedings, and book chapters by Flip Phillips."
+>
   <div class="py-6">
     <header class="mb-10 pb-6 border-b border-neutral-200 dark:border-neutral-800">
-      <span class="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold">
-        Research Output
-      </span>
-      <h1 class="text-3xl md:text-4xl font-serif font-bold text-neutral-900 dark:text-neutral-100 mt-1">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono font-medium bg-blue-50 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 mb-4">
+        <span>📚 Complete Bibliography &bull; {sortedPubs.length} Works (1986–2026)</span>
+      </div>
+      <h1 class="text-3xl md:text-5xl font-serif font-bold text-neutral-900 dark:text-neutral-50 tracking-tight leading-tight">
         Publications & Research
       </h1>
-      <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-2 max-w-2xl font-sans">
-        Articles in <em>ACM Transactions on Applied Perception</em>, <em>Vision Research</em>, <em>Experimental Brain Research</em>, and conferences across VSS and SIGGRAPH.
+      <p class="mt-4 text-base text-neutral-600 dark:text-neutral-300 leading-relaxed font-sans max-w-3xl">
+        A chronological archive of peer-reviewed journal articles, conference proceedings, book chapters, and technical reports across visual and haptic shape perception, materials, stereopsis, and computer animation.
       </p>
-      <div class="mt-4 flex flex-wrap gap-3 font-mono">
+
+      <div class="mt-6 flex flex-wrap items-center gap-3 font-mono text-xs">
         <a
           href="/pubs/Flip%20Phillips%20External%20CV.pdf"
           target="_blank"
-          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900 hover:opacity-90 font-medium transition-all shadow-xs"
         >
-          📄 Download Full CV (PDF) &rarr;
+          📄 Download Full Curriculum Vitæ (PDF) &rarr;
         </a>
         <a
           href="https://scholar.google.com/citations?user=flipphillips"
           target="_blank"
-          class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 font-medium transition-colors"
         >
           🎓 Google Scholar Profile &rarr;
         </a>
       </div>
+
+      <!-- Filter Controls -->
+      <div class="mt-8 flex flex-wrap items-center gap-2 font-mono text-xs" id="pub-filter-container">
+        <button
+          data-filter="all"
+          class="pub-filter-btn px-3 py-1.5 rounded-lg bg-neutral-900 text-white dark:bg-neutral-100 dark:text-neutral-900 font-medium transition-colors cursor-pointer"
+        >
+          All ({sortedPubs.length})
+        </button>
+        <button
+          data-filter="highlight"
+          class="pub-filter-btn px-3 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 font-medium transition-colors cursor-pointer"
+        >
+          ✦ Selected Works ({highlightCount})
+        </button>
+        <button
+          data-filter="journal"
+          class="pub-filter-btn px-3 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 font-medium transition-colors cursor-pointer"
+        >
+          Journal Articles ({journalCount})
+        </button>
+        <button
+          data-filter="conference"
+          class="pub-filter-btn px-3 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 font-medium transition-colors cursor-pointer"
+        >
+          Conferences ({confCount})
+        </button>
+        <button
+          data-filter="other"
+          class="pub-filter-btn px-3 py-1.5 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 font-medium transition-colors cursor-pointer"
+        >
+          Books & Reports
+        </button>
+      </div>
     </header>
 
-    <div class="divide-y divide-neutral-200 dark:divide-neutral-800">
-      {pubs.map(pub => {
-        const formattedDate = pub.data.date ? new Date(pub.data.date).toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'short'
-        }) : '';
+    <!-- Publications List -->
+    <div class="space-y-6" id="publications-list">
+      {sortedPubs.map(pub => {
+        let categories = ['all', pub.type];
+        if (pub.highlight) categories.push('highlight');
+        if (pub.type === 'book' || pub.type === 'preprint' || pub.type === 'techreport' || pub.type === 'magazine') {
+          categories.push('other');
+        }
 
         return (
-          <article class="py-6 first:pt-0 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
-            <div class="max-w-3xl">
-              <h2 class="text-lg font-serif font-bold text-neutral-900 dark:text-neutral-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                <a href={`/folklore/${pub.data.slug || pub.id.replace(/\.md$/, '')}`}>
-                  {pub.data.title}
-                </a>
-              </h2>
-
-              {pub.data.excerpt && (
-                <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-300 line-clamp-3 leading-relaxed font-sans">
-                  {pub.data.excerpt.replace(/\[Read More\].*$/, '')}
-                </p>
-              )}
-
-              {pub.data.tags && pub.data.tags.length > 0 && (
-                <div class="mt-3 flex flex-wrap gap-1.5 text-xs font-mono text-neutral-400 dark:text-neutral-500">
-                  {pub.data.tags.map(t => (
-                    <span class="px-2 py-0.5 rounded bg-neutral-100 dark:bg-neutral-800/80 text-[11px]">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <div class="text-xs font-mono text-neutral-400 dark:text-neutral-500 whitespace-nowrap">
-              {formattedDate}
-            </div>
-          </article>
+          <div class="pub-item transition-opacity" data-categories={categories.join(' ')}>
+            <PublicationCard pub={pub} />
+          </div>
         );
       })}
     </div>
   </div>
 </BaseLayout>
+
+<script>
+  const filterBtns = document.querySelectorAll<HTMLButtonElement>('.pub-filter-btn');
+  const pubItems = document.querySelectorAll<HTMLElement>('.pub-item');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter || 'all';
+
+      // Update button active styling
+      filterBtns.forEach(b => {
+        b.classList.remove('bg-neutral-900', 'text-white', 'dark:bg-neutral-100', 'dark:text-neutral-900');
+        b.classList.add('bg-neutral-100', 'dark:bg-neutral-800', 'text-neutral-600', 'dark:text-neutral-300');
+      });
+      btn.classList.remove('bg-neutral-100', 'dark:bg-neutral-800', 'text-neutral-600', 'dark:text-neutral-300');
+      btn.classList.add('bg-neutral-900', 'text-white', 'dark:bg-neutral-100', 'dark:text-neutral-900');
+
+      // Filter publications
+      pubItems.forEach(item => {
+        const categories = (item.dataset.categories || '').split(' ');
+        if (filter === 'all' || categories.includes(filter)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
