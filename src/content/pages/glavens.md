@@ -25,7 +25,7 @@ We are making the object data available here for use by the research community. 
 -   Phillips, F, Casella, MW, and Egan, EJL (2016). Glaven objects (v1.4) \[3D Object Files\]. Retrieved from github.com/skidvision/Glavens on (date).
 -   Phillips, F, Egan, EJL. & Perry, BN. (2009) Perceptual equivalence between vision and touch is complexity dependent. _Acta Psychol_ **132,** 259–266.
 
-All commercial uses, other than those granted by the CC BY-NC-SA 4.0 license, are explicitly reserved by the authors. For permission, please contact [flip@flipphillips.com](mailto:flip@flipphillips.com)
+All commercial uses, other than those granted by the CC BY-NC-SA 4.0 license, are explicitly reserved by the authors. For permission, please contact [flip.phillips@rit.edu](mailto:flip.phillips@rit.edu)
 
 ## Data
 

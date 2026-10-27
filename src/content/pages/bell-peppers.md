@@ -22,7 +22,7 @@ as well as any of the following that seem useful —
 -   Norman, J. F., Phillips, F., Holmin, J. S., Norman, H. F., Beers, A., Boswell, A. M., et al. (2012). Solid shape discrimination from vision and haptics: natural objects (Capsicum annuum) and Gibson’s “feelies.” Experimental Brain Research, 222(3), 321–332. http://doi.org/10.1007/s00221-012-3220-7
 -   Norman, J. F., Phillips, F., Cheeseman, J. R., Thomason, K. E., Ronning, C., Behari, K., et al. (2016). Perceiving Object Shape from Specular Highlight Deformation, Boundary Contour Deformation, and Active Haptic Manipulation. PLoS ONE, 11(2), e0149058. http://doi.org/10.1371/journal.pone.0149058
 
-All commercial uses, other than those granted by the CC BY-NC-SA 4.0 license, are explicitly reserved by the authors. For permission, please contact [flip@flipphillips.com](mailto:flip@flipphillips.com) and/or [Farley.Norman@wku.edu](mailto:Farley.Norman@wku.edu)
+All commercial uses, other than those granted by the CC BY-NC-SA 4.0 license, are explicitly reserved by the authors. For permission, please contact [flip.phillips@rit.edu](mailto:flip.phillips@rit.edu) and/or [Farley.Norman@wku.edu](mailto:Farley.Norman@wku.edu)
 
 ## Data
 

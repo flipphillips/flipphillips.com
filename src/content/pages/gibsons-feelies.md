@@ -17,7 +17,7 @@ We are making the scan data available here, for use by the research community. P
 -   Phillips F and Egan E. (2016). Gibson Feelies (v1.1) \[3D Object Files\]. Retrieved from https://github.com/skidvision/Feelies on (date).
 -   Norman, J. F. _et al._ Solid shape discrimination from vision and haptics: natural objects (_Capsicum annuum_) and Gibson’s ‘feelies’. _Exp Brain Res_ **222,** 321–332 (2012).
 
-All commercial uses, other than those granted by the CC BY-NC-SA 4.0 license, are explicitly reserved by the authors. For permission, please contact [flip@flipphillips.com](mailto:flip@flipphillips.com) and/or [Farley.Norman@wku.edu](mailto:Farley.Norman@wku.edu)
+All commercial uses, other than those granted by the CC BY-NC-SA 4.0 license, are explicitly reserved by the authors. For permission, please contact [flip.phillips@rit.edu](mailto:flip.phillips@rit.edu) and/or [Farley.Norman@wku.edu](mailto:Farley.Norman@wku.edu)
 
 ## Data
 

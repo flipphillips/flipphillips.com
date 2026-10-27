@@ -105,7 +105,7 @@ Motion Picture Science
 300 Lomb Memorial Drive  
 Rochester, NY 14623-5608
 
-[flip@flipphillips.com](mailto:flip@flipphillips.com)  
+[flip.phillips@rit.edu](mailto:flip.phillips@rit.edu)  
 [flipphillips.com](https://flipphillips.com)
 
 -   [GitHub – Lab](https://github.com/ritmps)
