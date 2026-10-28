@@ -40,3 +40,174 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(140, 150, 160, 0.45);
 }
+
+/* ==========================================================================
+   Typographic Footnotes Styling
+   ========================================================================== */
+
+/* Prevent superscripts from disrupting paragraph line-height */
+sup {
+  vertical-align: baseline;
+  position: relative;
+  top: -0.45em;
+  font-size: 0.72em;
+  line-height: 0;
+}
+
+/* Inline footnote reference link */
+a[data-footnote-ref] {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  padding: 0 0.15rem;
+  margin: 0 0.05rem;
+  color: #2563eb;
+  text-decoration: none !important;
+  border-radius: 0.2rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+:is(.dark) a[data-footnote-ref] {
+  color: #60a5fa;
+}
+
+a[data-footnote-ref]:hover {
+  text-decoration: underline !important;
+  background-color: rgba(59, 130, 246, 0.12);
+}
+
+/* Footnotes bottom section */
+section[data-footnotes],
+.prose section.footnotes {
+  margin-top: 3.5rem !important;
+  padding-top: 1.5rem !important;
+  border-top: 1px solid rgba(140, 150, 160, 0.25) !important;
+  font-size: 0.875rem !important;
+  line-height: 1.65 !important;
+  color: #525252;
+}
+
+:is(.dark) section[data-footnotes],
+:is(.dark) .prose section.footnotes {
+  border-top-color: rgba(140, 150, 160, 0.25) !important;
+  color: #a3a3a3;
+}
+
+/* If an <hr> immediately precedes footnotes, hide it or remove duplicate spacing */
+.prose hr + section[data-footnotes] {
+  margin-top: 1rem !important;
+  border-top: none !important;
+  padding-top: 0 !important;
+}
+
+/* Un-hide the semantic footnote header and style as clean small-caps label */
+section[data-footnotes] #footnote-label,
+.prose section.footnotes #footnote-label {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  clip: auto !important;
+  overflow: visible !important;
+  margin: 0 0 1rem 0 !important;
+  font-family: var(--font-mono);
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #737373 !important;
+}
+
+:is(.dark) section[data-footnotes] #footnote-label,
+:is(.dark) .prose section.footnotes #footnote-label {
+  color: #a3a3a3 !important;
+}
+
+/* Footnote ordered list & list items */
+section[data-footnotes] ol,
+.prose section.footnotes ol {
+  margin: 0 !important;
+  padding-left: 1.25rem !important;
+  list-style-type: decimal !important;
+}
+
+section[data-footnotes] li,
+.prose section.footnotes li {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+  padding-left: 0.25rem !important;
+}
+
+section[data-footnotes] li::marker,
+.prose section.footnotes li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: #737373;
+}
+
+:is(.dark) section[data-footnotes] li::marker,
+:is(.dark) .prose section.footnotes li::marker {
+  color: #a3a3a3;
+}
+
+section[data-footnotes] li p,
+.prose section.footnotes li p {
+  display: inline;
+  margin: 0 !important;
+}
+
+/* Footnote return backref link (↩) */
+a[data-footnote-backref],
+.data-footnote-backref {
+  display: inline-block;
+  margin-left: 0.35rem;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 0.95em;
+  color: #2563eb !important;
+  text-decoration: none !important;
+  padding: 0 0.2rem;
+  border-radius: 0.2rem;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+:is(.dark) a[data-footnote-backref],
+:is(.dark) .data-footnote-backref {
+  color: #60a5fa !important;
+}
+
+a[data-footnote-backref]:hover,
+.data-footnote-backref:hover {
+  color: #1d4ed8 !important;
+  background-color: rgba(59, 130, 246, 0.12);
+  transform: translateY(-1px);
+}
+
+:is(.dark) a[data-footnote-backref]:hover,
+:is(.dark) .data-footnote-backref:hover {
+  color: #93c5fd !important;
+}
+
+/* Smooth anchor targeting with visual highlight pulse */
+:target {
+  scroll-margin-top: 5rem;
+}
+
+@keyframes footnote-target-pulse {
+  0% {
+    background-color: rgba(59, 130, 246, 0.22);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+section[data-footnotes] li:target,
+.prose section.footnotes li:target {
+  animation: footnote-target-pulse 2s ease-out;
+  border-radius: 0.375rem;
+  padding-left: 0.375rem;
+}
+
+a[data-footnote-ref]:target {
+  animation: footnote-target-pulse 2s ease-out;
+}

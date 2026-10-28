@@ -22,8 +22,8 @@ He gave JL an aluminum briefcase with laser disks of all his movies. That was pr
 
 Cool enough.
 
-Mine was missing a screw. Craig loaned me a screw, which I took to the hardware store over by Shamrock Concrete[1](#6c2b5436-6aa1-49e4-b55a-f2f7850ba64e) and they really didn’t have anything that small. No bother, one of the toys I took apart in Pete + My office toy box had the same size.
+Mine was missing a screw. Craig loaned me a screw, which I took to the hardware store over by Shamrock Concrete[^1] and they really didn’t have anything that small. No bother, one of the toys I took apart in Pete + My office toy box had the same size.
 
 Cool enough.
 
-1.  Most ironically wonderful name ever. [↩︎](#6c2b5436-6aa1-49e4-b55a-f2f7850ba64e-link)
+[^1]: Most ironically wonderful name ever.

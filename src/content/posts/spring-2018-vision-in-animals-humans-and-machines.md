@@ -12,7 +12,7 @@ excerpt: "Vision in Humans, Animals and Machines is a seminar / hands-on course 
 
 _Vision in Humans, Animals and Machines_ is a seminar / hands-on course where we engage in a sort of comparative neuroscience with respect to how organic and inorganic systems ‘see’.
 
-Some things are hard for animals, some things are easy. The same can be said for machines. The exhaustively deployed aphorism — “Easy things are hard for computers, hard things are easy for computers” reminds us that, the way ‘computer vision’ works probably doesn’t have all that much in common with how living organisms do[1](#fn1-543 "see footnote").
+Some things are hard for animals, some things are easy. The same can be said for machines. The exhaustively deployed aphorism — “Easy things are hard for computers, hard things are easy for computers” reminds us that, the way ‘computer vision’ works probably doesn’t have all that much in common with how living organisms do[^1].
 
 One of the best ways to observe this is to probe situations where each type of system _fails_ to work. In this class, we learned about biological mechanisms of vision as well as computational analogs. We tried to ‘break’ computer vision systems in systematic ways and analyzed the results.
 
@@ -22,7 +22,7 @@ One of the best ways to observe this is to probe situations where each type of s
 
 This year, the final projects were self-determined. Individuals and teams pitched their proposals early in the semester and we refined and implemented them throughout the rest of the term. They then pitched the final work and demonstrated what they had accomplished (and failed to).
 
-The projects had to use computational methods to implement some function or malfunction of the visual system. There was some overlap between this class and the _Computational Methods_ class, so therefore there was a lot of Mathematica used, along with some Lego MindStorms[2](#fn2-543 "see footnote").
+The projects had to use computational methods to implement some function or malfunction of the visual system. There was some overlap between this class and the _Computational Methods_ class, so therefore there was a lot of Mathematica used, along with some Lego MindStorms[^2].
 
 Here are this year’s projects. Please enjoy them —
 
@@ -52,7 +52,7 @@ Lego robotics, _Euglena_.
 
 * * *
 
-### Modeling Prosopagnosia[3](#fn3-543 "see footnote")
+### Modeling Prosopagnosia[^3]
 
 Can we make a machine learning based face recognizer ‘face-blind’?
 
@@ -72,8 +72,6 @@ Can we make a machine-vision system that can track a rat in a socialization appa
 
 Zachariah Arnold, Iman Bays, Sierra Carlen, George Chakalos, Jessica Cheng, Daniela Cossio, Allison Dalton, Seeley Fancher, Sara Fontana, Rachel Greene, Julia Howe, Donna Nguyen, Jeffrey Okoro, Reece Robinson, Anthony Song, Henry Stadler, Megan Volkert, Xueying Wu.
 
-* * *
-
-1.  This is, of course, fine. [↩︎](#fnr1-543 "return to article")
-2.  Remind me to tell you the story of visiting Mitch Resnick’s lab at MIT, back while I was working at Pixar, and playing with the _OG_ LegoLogo blocks and wires and things. [↩︎](#fnr2-543 "return to article")
-3.  People’s choice award winner. [↩︎](#fnr3-543 "return to article")
+[^1]: This is, of course, fine.
+[^2]: Remind me to tell you the story of visiting Mitch Resnick’s lab at MIT, back while I was working at Pixar, and playing with the _OG_ LegoLogo blocks and wires and things.
+[^3]: People’s choice award winner.
