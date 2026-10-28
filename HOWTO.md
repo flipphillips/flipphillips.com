@@ -17,7 +17,10 @@ You do **not** need to memorize or type shell commands in the terminal. All auth
 | **`Astro: Build Site`** | Full production build into `./dist` + builds Pagefind search index |
 | **`Astro: Preview Build`** | Inspects the compiled static `./dist` files locally before deploying |
 | **`Astro: New Post / Folklore Story`** | Interactively scaffolds a new Folklore story or Dispatch in `src/content/posts/` |
-| **`Astro: Add Publication (via DOI)`** | Fetches publication metadata by DOI and adds to `src/data/publications.ts` |
+| **`Astro: Add Publication (via DOI)`** | Fetches publication metadata by DOI and adds to `src/data/publications.bib` |
+| **`CV: Sync Publications to ~/GitHub/fpcv`** | Syncs `publications.bib` directly to `~/GitHub/fpcv/publications.bib` |
+| **`CV: Check Differences with cv.tex`** | Compares `publications.bib` against `fpcv/cv.tex` to find missing entries |
+| **`CV: Generate Formatted LaTeX for cv.tex`** | Formats publications into the exact `\yearsheader{}` LaTeX macro format for `cv.tex` |
 | **`Astro: Check Image Sizes (Dry Run)`** | Scans `public/images/` and reports oversized photos & potential space savings |
 | **`Astro: Optimize Images (In-Place)`** | Safely resizes & compresses backlog photos down to 2,048px retina masters |
 | **`Astro: Build Search Index (Pagefind)`**| Re-indexes site content so local dev search is fresh |
@@ -44,7 +47,7 @@ npm run new:post "Your Story Title"
   * Or type a filename already in `public/images/` (e.g. `my-photo.jpg`).
   * Or press Enter to skip—if skipped, the folklore archive will automatically pick up the first `![Alt](/images/...)` picture embedded in your story!
 
-### 2. Adding an Academic Publication (with PDF & Thumbnail)
+### 2. Adding an Academic Publication (BibTeX Source of Truth)
 Run via **Terminal &rarr; Run Task... &rarr; Astro: Add Publication** or in terminal:
 ```bash
 npm run new:pub <DOI>
@@ -53,12 +56,81 @@ npm run new:pub 10.1145/3799829.3812522
 # or run interactively:
 npm run new:pub
 ```
+* **Single Source of Truth (`src/data/publications.bib`):**
+  * The publication archive is driven entirely by standard BibTeX!
+  * You can use the `new:pub` tool, **or simply paste an `@article{...}` entry directly into [`src/data/publications.bib`](file:///Users/fxpppr/GitHub/flipphillips.com/src/data/publications.bib)** exported from Zotero, Google Scholar, CrossRef, or BibDesk.
+  * Custom fields for web assets are fully supported and standard-compliant:
+    * `pdf = {/pubs/MyPaper.pdf}`
+    * `image = {/pubs/MyPaper-thumb.png}`
+    * `post = {/folklore/my-paper-story}`
+    * `highlight = {true}` (features it on the homepage)
 * **Smart Asset Ingest:**
-  * When prompted for the PDF, **drag and drop your PDF from Finder** (e.g. from Downloads/Desktop) directly into the terminal! The script copies it into `public/pubs/` and wires up `pdf: "/pubs/..."`.
-  * When prompted for the thumbnail, **drag and drop your teaser image from Finder**! The script automatically conforms and optimizes the image, copies it to `public/pubs/`, and sets `image: "/pubs/..."`.
-  * Prompts: `Highlight on homepage / Selected Works? (y/N):` &rarr; Answering `y` adds the amber `✦ Selected Work` badge and features it on the homepage!
+  * When prompted for the PDF, **drag and drop your PDF from Finder** directly into the terminal! The script copies it into `public/pubs/` and wires up `pdf = {...}`.
+  * When prompted for the thumbnail, **drag and drop your teaser image from Finder**! The script automatically conforms and optimizes the image, copies it to `public/pubs/`, and sets `image = {...}`.
+  * Automatically syncs to `~/GitHub/fpcv/publications.bib` when finished!
 
-### 3. Image Conformer & Optimizer Deep Dive
+---
+
+### 3. Synchronizing Publications with Your Paper CV (`fpcv`)
+The website and your LaTeX CV repository (`~/GitHub/fpcv`) share the exact same bibliography data.
+
+Run via **Terminal &rarr; Run Task...** or via npm scripts:
+```bash
+# 1. Sync publications.bib to ~/GitHub/fpcv/publications.bib
+npm run cv:sync
+
+# 2. Compare publications.bib against ~/GitHub/fpcv/cv.tex
+npm run cv:diff
+
+# 3. Generate ready-to-paste LaTeX entries in the exact cv.tex macro style
+npm run cv:latex
+# or generate for a specific year:
+npm run cv:latex 2026
+```
+
+#### How the LaTeX Formatter Works:
+The `cv:latex` tool formats BibTeX entries directly into your established `cv.tex` conventions:
+- Inserts `\yearsheader{2026}`
+- Formats authors with non-breaking spaces `~` (e.g. `V~Simion, S~Farnand, DL~Long`)
+- Automatically substitutes `\me` for Flip Phillips
+- Uses `\&` for the last author
+- Formats `\emph{Journal Name}`, `vol.\ X, num.\ Y, pp.\ A--B`
+- Adds `\doi{...}` macro links
+
+---
+
+### 4. Linking Companion Blog Posts & Publications (Bidirectional)
+When you have a new paper and want to write a Folklore/Blog post about the backstory, you can link them bidirectionally with zero boilerplate.
+
+You only need to declare the connection in **one** place:
+
+#### Method A: From the BibTeX Entry (`src/data/publications.bib`)
+Add `post = {/folklore/slug}` to the entry:
+```bibtex
+@article{perceptual-plausibility-exaggerated-motion-2024,
+  title = {Perceptual plausibility of exaggerated realistic motion},
+  ...
+  post = {/folklore/perceptual-plausibility-of-exaggerated-realistic-motion},
+}
+```
+
+#### Method B: From the Blog Post Frontmatter (`src/content/posts/*.md`)
+Add `publication: "bibtex-id"` to the markdown frontmatter:
+```yaml
+---
+title: "Squashing and Stretching Across the Uncanny Valley"
+date: "2024-07-16"
+publication: "perceptual-plausibility-exaggerated-motion-2024"
+---
+```
+
+#### What Renders Automatically:
+1. **On `/publications`**: An action badge **`📝 Backstory →`** appears on the publication card, taking readers straight to your narrative essay.
+2. **On `/folklore/[slug]`**: A sleek **`📄 Companion Academic Publication`** callout box renders right above the article text with direct links to the **`[📄 PDF]`** and **`[DOI →]`**.
+
+---
+
+### 5. Image Conformer & Optimizer Deep Dive
 ```bash
 # Check image sizes and potential savings without modifying anything (Dry Run):
 npm run images:check
@@ -117,62 +189,54 @@ Any file in `src/pages/` automatically becomes a route on your site:
   - File: `public/images/figure.png` &rarr; URL: `/images/figure.png`
 - Use `public/` for downloads, PDFs, raw 3D models, and external media.
 
-### 4. Structured Data (`src/data/publications.ts`)
-Rather than scattered markdown files, all academic publications live in a typed TypeScript structure with automatic DOI links, author highlights, and sorting.
+### 4. Structured Data (`src/data/publications.bib`)
+Rather than scattered markdown files or manually edited code, all academic publications live in standard BibTeX (`publications.bib`). The website parses this dynamically at build/dev time with zero client overhead.
 
 ---
 
-## Exercise: Adding a PDF & Thumbnail to a Publication
+## Exercise: Adding a PDF & Thumbnail to a Publication in BibTeX
 
-Here is how to attach a downloadable PDF and a thumbnail preview to the **Phillips, Simion, Long, et al.** paper:
+Here is how to attach a downloadable PDF and a thumbnail preview to a paper in `src/data/publications.bib`:
 
 ### Step 1: Place your PDF and Image in `public/pubs/`
 Copy your PDF and thumbnail image into the `public/pubs/` directory:
 - PDF path: `public/pubs/Simion2026-SpectralRendering.pdf`
-- Image path: `public/pubs/Simion2026-thumb.jpg` (or `.png`)
+- Image path: `public/pubs/Simion2026-thumb.png`
 
 > **URL Rule**: Because these files are inside `public/`, their web URLs start with `/pubs/`:
 > - `/pubs/Simion2026-SpectralRendering.pdf`
-> - `/pubs/Simion2026-thumb.jpg`
+> - `/pubs/Simion2026-thumb.png`
 
-### Step 2: Open `src/data/publications.ts`
-Find the publication entry (near line 21). It currently looks like this:
+### Step 2: Open `src/data/publications.bib`
+Find the publication entry:
 
-```typescript
-  // 2026
-  {
-    id: "spectral-rendering-virtual-production-2026",
-    year: 2026,
-    title: "Spectral rendering techniques to improve color matching in virtual production",
-    authors: ["V Simion", "S Farnand", "DL Long", "F Phillips"],
-    venue: "SMPTE Motion Imaging Journal",
-    volume: "135",
-    issue: "6",
-    type: "journal",
-    typeLabel: "Journal Article",
-    highlight: true
-  },
+```bibtex
+@article{spectral-rendering-virtual-production-2026,
+  title = {Spectral rendering techniques to improve color matching in virtual production},
+  author = {V Simion and S Farnand and DL Long and F Phillips},
+  journal = {SMPTE Motion Imaging Journal},
+  year = {2026},
+  volume = {135},
+  number = {6},
+  highlight = {true},
+}
 ```
 
-### Step 3: Add the `pdf` and `image` Fields
-Add the `pdf` and `image` properties to the object:
+### Step 3: Add `pdf` and `image` Fields
+Add the standard fields to the entry:
 
-```typescript
-  // 2026
-  {
-    id: "spectral-rendering-virtual-production-2026",
-    year: 2026,
-    title: "Spectral rendering techniques to improve color matching in virtual production",
-    authors: ["V Simion", "S Farnand", "DL Long", "F Phillips"],
-    venue: "SMPTE Motion Imaging Journal",
-    volume: "135",
-    issue: "6",
-    type: "journal",
-    typeLabel: "Journal Article",
-    highlight: true,
-    pdf: "/pubs/Simion2026-SpectralRendering.pdf",
-    image: "/pubs/Simion2026-thumb.jpg"
-  },
+```bibtex
+@article{spectral-rendering-virtual-production-2026,
+  title = {Spectral rendering techniques to improve color matching in virtual production},
+  author = {V Simion and S Farnand and DL Long and F Phillips},
+  journal = {SMPTE Motion Imaging Journal},
+  year = {2026},
+  volume = {135},
+  number = {6},
+  pdf = {/pubs/Simion2026-SpectralRendering.pdf},
+  image = {/pubs/Simion2026-thumb.png},
+  highlight = {true},
+}
 ```
 
 ### Step 4: Preview Your Changes

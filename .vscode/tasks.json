@@ -39,7 +39,28 @@
       "script": "new:pub",
       "problemMatcher": [],
       "label": "Astro: Add Publication (via DOI)",
-      "detail": "Fetch metadata by DOI and insert into src/data/publications.ts"
+      "detail": "Fetch metadata by DOI and insert into src/data/publications.bib"
+    },
+    {
+      "type": "npm",
+      "script": "cv:sync",
+      "problemMatcher": [],
+      "label": "CV: Sync Publications to ~/GitHub/fpcv",
+      "detail": "Syncs publications.bib from flipphillips.com to ~/GitHub/fpcv/publications.bib"
+    },
+    {
+      "type": "npm",
+      "script": "cv:diff",
+      "problemMatcher": [],
+      "label": "CV: Check Differences with cv.tex",
+      "detail": "Compares publications.bib against ~/GitHub/fpcv/cv.tex to find missing entries"
+    },
+    {
+      "type": "npm",
+      "script": "cv:latex",
+      "problemMatcher": [],
+      "label": "CV: Generate Formatted LaTeX for cv.tex",
+      "detail": "Formats publications into the exact \\yearsheader{} LaTeX macro format for cv.tex"
     },
     {
       "type": "npm",

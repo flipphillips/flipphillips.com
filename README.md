@@ -32,10 +32,19 @@ npm run new:post "Your Story Title"
 # or run interactively:
 npm run new:post
 
-# Add an academic publication via DOI (auto-fetches metadata from Crossref)
+# Add an academic publication via DOI or BibTeX
 npm run new:pub 10.1145/3799829.3812522
 # or run interactively for manual entry:
 npm run new:pub
+
+# Sync publications.bib with your paper CV repo (~/GitHub/fpcv)
+npm run cv:sync
+
+# Check if any publications in publications.bib are missing from cv.tex
+npm run cv:diff
+
+# Generate formatted LaTeX entries in the exact cv.tex macro style
+npm run cv:latex [year]
 
 # Check image sizes and potential savings without modifying files (Dry Run)
 npm run images:check
@@ -68,7 +77,9 @@ flipphillips.com/
 │   │   ├── posts/              # 140+ essays, folklore stories, and notes
 │   │   └── pages/              # Static page content (about, feelies, etc.)
 │   ├── data/
-│   │   └── publications.ts     # TypeScript database of 55+ publications
+│   │   ├── publications.bib    # Single source of truth (BibTeX, 67 publications)
+│   │   ├── publications.ts     # Dynamic Astro publication loader
+│   │   └── bibtex.ts           # Zero-dependency BibTeX parser & mapper
 │   ├── layouts/
 │   │   └── BaseLayout.astro    # Global HTML shell, fonts, dark mode, scripts
 │   ├── pages/                  # File-based routing (pages & endpoints)
