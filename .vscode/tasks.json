@@ -54,6 +54,13 @@
       "problemMatcher": [],
       "label": "Astro: Optimize Images (In-Place)",
       "detail": "Safely compress & resize oversized images in public/images to 2048px retina masters"
+    },
+    {
+      "type": "npm",
+      "script": "pagefind",
+      "problemMatcher": [],
+      "label": "Astro: Build Search Index (Pagefind)",
+      "detail": "Re-index site content for instant local search in dev mode"
     }
   ]
 }

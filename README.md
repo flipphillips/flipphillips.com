@@ -22,6 +22,8 @@ npm run build
 npm run preview
 ```
 
+> **Tip:** You don't need to type these commands manually! In VS Code, go to **Terminal &rarr; Run Task...** (or press `Cmd+Shift+P` &rarr; `Tasks: Run Task`) to run any of these tools from a simple interactive menu. See [HOWTO.md](file:///Users/fxpppr/GitHub/flipphillips.com/HOWTO.md) for full workflows and image conformer details.
+
 ### Content Authoring Helpers
 
 ```bash
