@@ -7,6 +7,7 @@ categories: ["Bloggery","MyScience"]
 tags: ["3d","form","perception","scission","shape","slides"]
 isFolklore: false
 isPublication: false
+publication: "shape-scission-causal-segmentation-shape-vss-2018"
 excerpt: "Warts, cracks, causal shape segmentation. Research on shape perception usually focuses on the estimation of local surface geometry through cues like stereopsis, shading, or texture. Here, we argue that observers use these shape estimates to infer other object… [Read More](https://flipphillips.com/bloggery/vss-2018-shape-scission-causal-segmentation-of-shape/)"
 ---
 

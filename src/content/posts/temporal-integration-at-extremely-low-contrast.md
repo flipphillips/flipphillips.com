@@ -7,6 +7,7 @@ categories: ["MyScience"]
 tags: []
 isFolklore: false
 isPublication: false
+publication: "emerging-features-low-contrast-2004"
 excerpt: "Gabe Diaz’ thesis from 2004.   The goal of this research is to investigate the relationship between the abil- ity to recognize objects at very low contrasts and the duration for which they are presented. Empirical evidence suggests… [Read More](https://flipphillips.com/myscience/temporal-integration-at-extremely-low-contrast/)"
 ---
 

@@ -7,6 +7,7 @@ categories: ["Bloggery","MyScience"]
 tags: ["animation","balls","bouncing balls","uncanny valley","vss"]
 isFolklore: false
 isPublication: false
+publication: "exploring-uncanny-valley-vss-2018"
 excerpt: "Balls! Bouncing balls. This is science so we gotta start somewhere. Mori’s Uncanny Valley phenomena isn’t limited to robotics. It has been observed in many other areas, including the fine arts, especially photorealistic painting, sculpture, computer graphics, and… [Read More](https://flipphillips.com/bloggery/vss-2018-exploring-the-uncanny-valley/)"
 ---
 

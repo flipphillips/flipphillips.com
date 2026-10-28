@@ -7,6 +7,7 @@ categories: ["Bloggery","MyScience"]
 tags: ["art","depth","painting","perspective","poster","vss"]
 isFolklore: false
 isPublication: false
+publication: "gravity-ground-plane-geometry-perspective-images-2018"
 excerpt: "“The small things float to the top of… gravity” — Rickie Lee Jones Renaissance artists noticed that placing objects on a visible ground plane anchors them stably, making it easy to perceive their depth. Subsequently, they developed methods… [Read More](https://flipphillips.com/bloggery/vss-2018-gravity-and-ground-plane-geometry-in-perspective-images/)"
 ---
 

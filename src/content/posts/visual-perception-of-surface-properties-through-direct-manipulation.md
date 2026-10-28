@@ -7,6 +7,7 @@ categories: ["Bloggery","MyScience"]
 tags: ["materials","perception","shape","Tangible","Vision"]
 isFolklore: false
 isPublication: false
+publication: "visual-perception-surface-properties-direct-manipulation-2021"
 excerpt: "VSS21 – tangible materials. Some work we started at RIT / Gießen right before the universe shut down for a virus break. Snehal was quite the trooper, carrying it on while the rest of us were huddled in… [Read More](https://flipphillips.com/bloggery/visual-perception-of-surface-properties-through-direct-manipulation/)"
 ---
 

@@ -7,6 +7,7 @@ categories: ["Bloggery","MyScience"]
 tags: ["apples and oranges","arduino","classes","color","hardware","mathematica","projects","teaching"]
 isFolklore: false
 isPublication: false
+publication: "comparing-apples-and-oranges-wolfram-2019"
 excerpt: "A talk I gave at the Wolfram Technology Conference, 2019. In our “Computational Methods for Psychology and Neuroscience” course, we teach undergraduate students the fundamentals of computational thinking (as opposed to traditional “programming”) using a project-based approach. Over… [Read More](https://flipphillips.com/bloggery/apples-and-oranges/)"
 ---
 

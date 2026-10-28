@@ -7,6 +7,7 @@ categories: ["Folklore","MyScience"]
 tags: ["2d","archives","chap","computer graphics","drawing","history","pic","pixar","visualization"]
 isFolklore: true
 isPublication: false
+publication: "libdraw-pixar-image-computer-1987"
 excerpt: "Back in the 1980s I wrote a bunch of software as part of the volumetric medical imaging system we designed for Philips (nee Picker) Medical. We used to document our code in those days. I was digging through some archival stuff of mine, looking for an implementation of Bresenham’s line algorithm I wrote for Mathematica, and this document popped up."
 ---
 

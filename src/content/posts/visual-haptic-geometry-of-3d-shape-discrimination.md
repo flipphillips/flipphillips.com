@@ -7,6 +7,8 @@ categories: ["Bloggery","MyScience"]
 tags: []
 isFolklore: false
 isPublication: false
+featuredImage: "/images/uploads/2015/05/Users_flip_Dropbox_Public-300x190.png"
+publication: "visual-haptic-geometry-3d-shape-discrimination-2015"
 excerpt: "Phillips, F., O’Donnell, E. & Kernis, N. Visual and haptic geometry of 3D shape discrimination. Journal of Vision 15, 866–866 (2015). PDF Some preliminary work on ‘where you look when you’re trying to discriminate 3D objects.’ Turns out, it’s… [Read More](https://flipphillips.com/bloggery/visual-haptic-geometry-of-3d-shape-discrimination/)"
 ---
 

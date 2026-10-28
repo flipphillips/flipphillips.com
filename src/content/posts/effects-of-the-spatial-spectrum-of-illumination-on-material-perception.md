@@ -7,6 +7,7 @@ categories: ["Bloggery","MyScience"]
 tags: ["illumination","materials","perception","Vision","vss"]
 isFolklore: false
 isPublication: false
+publication: "effects-spatial-spectrum-reflective-refractive-materials-2019"
 excerpt: "A little VSS 2019 fun with some old friends. Old as in length of time we’ve all known each other, not in geologic age. Like all good science, things changed a little between abstract submission and the actual… [Read More](https://flipphillips.com/bloggery/effects-of-the-spatial-spectrum-of-illumination-on-material-perception/)"
 ---
 

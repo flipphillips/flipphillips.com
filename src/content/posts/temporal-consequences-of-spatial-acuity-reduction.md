@@ -7,6 +7,7 @@ categories: ["Bloggery","MyScience"]
 tags: ["collaboration","contrast","early vision","spatiotemporal","Vision","vss"]
 isFolklore: false
 isPublication: false
+publication: "temporal-consequences-spatial-acuity-reduction-2019"
 excerpt: "Space-time visual insanity. Some work I collaborated on concerning spatiotemporal vision. We have some very interesting findings hinted at in the ‘Puzzles’ section that I look forward to us getting out there. Temporal consequences of spatial acuity reduction… [Read More](https://flipphillips.com/bloggery/temporal-consequences-of-spatial-acuity-reduction/)"
 ---
 

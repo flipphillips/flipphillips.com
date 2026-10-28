@@ -7,6 +7,8 @@ categories: ["Bloggery","MyScience"]
 tags: ["drawing","science","shape","specularity","Vision"]
 isFolklore: false
 isPublication: false
+featuredImage: "/images/uploads/2016/05/sshape.png"
+publication: "specularity-shape-from-line-drawings-2014"
 excerpt: "Indications of shape via specularity in line drawings. PDF here: Mazzarella2014"
 ---
 
