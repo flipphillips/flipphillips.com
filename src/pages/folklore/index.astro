@@ -87,7 +87,7 @@ const folkloreCount = allPosts.filter(p => p.data.isFolklore || p.data.categorie
                   )}
                 </div>
                 {post.data.categories && post.data.categories.length > 0 && (
-                  <span class="text-neutral-500 font-sans">{post.data.categories.join(' &bull; ')}</span>
+                  <span class="text-neutral-500 font-sans">{post.data.categories.join(' • ')}</span>
                 )}
               </div>
 

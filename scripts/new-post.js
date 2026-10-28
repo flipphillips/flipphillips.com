@@ -5,6 +5,7 @@ import path from 'path';
 import readline from 'node:readline';
 import { fileURLToPath } from 'url';
 import { spawn } from 'child_process';
+import sharp from 'sharp';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -42,7 +43,7 @@ function slugify(text) {
     .replace(/(^-|-$)/g, '');
 }
 
-function handleAssetInput(input, targetDir, defaultPrefix) {
+async function handleAssetInput(input, targetDir, defaultPrefix, maxDim = 2048) {
   if (!input) return null;
   let cleanPath = input.replace(/^['"]|['"]$/g, '').replace(/\\ /g, ' ').trim();
   if (cleanPath.startsWith('~/')) {
@@ -51,9 +52,53 @@ function handleAssetInput(input, targetDir, defaultPrefix) {
 
   // If drag-and-dropped real file from Finder
   if (fs.existsSync(cleanPath) && fs.statSync(cleanPath).isFile()) {
-    const filename = path.basename(cleanPath);
-    const destPath = path.join(targetDir, filename);
     fs.mkdirSync(targetDir, { recursive: true });
+    let ext = path.extname(cleanPath).toLowerCase();
+    const basename = path.basename(cleanPath, path.extname(cleanPath));
+
+    // Convert Apple HEIC/HEIF to JPEG for web compatibility
+    let isConverted = false;
+    if (ext === '.heic' || ext === '.heif') {
+      ext = '.jpg';
+      isConverted = true;
+    }
+
+    const safeBasename = slugify(basename) || 'image';
+    const filename = `${safeBasename}${ext}`;
+    const destPath = path.join(targetDir, filename);
+
+    if (['.jpg', '.jpeg', '.png', '.webp'].includes(ext) || isConverted) {
+      try {
+        const origSize = fs.statSync(cleanPath).size;
+        const meta = await sharp(cleanPath).metadata();
+        let pipeline = sharp(cleanPath).rotate().resize({
+          width: maxDim,
+          height: maxDim,
+          fit: 'inside',
+          withoutEnlargement: true,
+        });
+
+        if (ext === '.jpg' || ext === '.jpeg') {
+          pipeline = pipeline.jpeg({ quality: 85, progressive: true, mozjpeg: true });
+        } else if (ext === '.png') {
+          pipeline = pipeline.png({ quality: 85, compressionLevel: 8 });
+        } else if (ext === '.webp') {
+          pipeline = pipeline.webp({ quality: 85 });
+        }
+
+        await pipeline.toFile(destPath);
+        const newSize = fs.statSync(destPath).size;
+        const origDim = `${meta.width || '?'}x${meta.height || '?'}`;
+        const newMeta = await sharp(destPath).metadata();
+        const newDim = `${newMeta.width}x${newMeta.height}`;
+        console.log(`   ✨ Optimized & copied into: public/images/${filename}`);
+        console.log(`      ${origDim} (${(origSize / 1024 / 1024).toFixed(1)} MB) -> ${newDim} (${(newSize / 1024).toFixed(0)} KB)`);
+        return `${defaultPrefix}/${filename}`;
+      } catch (err) {
+        console.warn(`   ⚠️ Optimization fallback (${err.message}). Performing standard copy.`);
+      }
+    }
+
     fs.copyFileSync(cleanPath, destPath);
     console.log(`   📋 Copied image into: public/images/${filename}`);
     return `${defaultPrefix}/${filename}`;
@@ -106,7 +151,7 @@ async function main() {
   const thumbInput = await prompter.ask(
     'Thumbnail image (drag & drop file, filename in public/images/, or Enter to skip): '
   );
-  const featuredImage = handleAssetInput(thumbInput, imagesDir, '/images');
+  const featuredImage = await handleAssetInput(thumbInput, imagesDir, '/images');
 
   prompter.close();
 

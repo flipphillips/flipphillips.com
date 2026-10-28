@@ -40,6 +40,20 @@
       "problemMatcher": [],
       "label": "Astro: Add Publication (via DOI)",
       "detail": "Fetch metadata by DOI and insert into src/data/publications.ts"
+    },
+    {
+      "type": "npm",
+      "script": "images:check",
+      "problemMatcher": [],
+      "label": "Astro: Check Image Sizes (Dry Run)",
+      "detail": "Inspect public/images for oversized photos and calculate potential space savings"
+    },
+    {
+      "type": "npm",
+      "script": "images:optimize",
+      "problemMatcher": [],
+      "label": "Astro: Optimize Images (In-Place)",
+      "detail": "Safely compress & resize oversized images in public/images to 2048px retina masters"
     }
   ]
 }

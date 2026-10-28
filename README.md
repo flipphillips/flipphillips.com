@@ -34,6 +34,12 @@ npm run new:post
 npm run new:pub 10.1145/3799829.3812522
 # or run interactively for manual entry:
 npm run new:pub
+
+# Check image sizes and potential savings without modifying files (Dry Run)
+npm run images:check
+
+# Optimize and compress oversized images in public/images in-place
+npm run images:optimize
 ```
 
 ---

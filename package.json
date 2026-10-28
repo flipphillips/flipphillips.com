@@ -10,7 +10,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "new:post": "node scripts/new-post.js",
-    "new:pub": "node scripts/new-pub.js"
+    "new:pub": "node scripts/new-pub.js",
+    "images:optimize": "node scripts/optimize-images.js",
+    "images:check": "node scripts/optimize-images.js --dry-run"
   },
   "keywords": [],
   "author": "",

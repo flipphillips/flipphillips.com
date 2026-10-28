@@ -10,8 +10,9 @@ npm run new:post
 # or pass the title directly:
 npm run new:post "Your Story Title"
 ```
-* **Thumbnails made easy:** When prompted for a thumbnail, you can:
-  * **Drag and drop** any image file from Finder directly into the terminal window! It will automatically copy it into `public/images/` and wire up `featuredImage` in your frontmatter.
+* **Smart Ingest & Thumbnails made easy:** When prompted for a thumbnail, you can:
+  * **Drag and drop** any image file (`.png`, `.jpg`, `.jpeg`, `.webp`, or even iPhone `.heic`) from Finder directly into the terminal window!
+  * **Automatic Optimization:** The script automatically normalizes EXIF orientation, converts `.heic` to `.jpg`, resizes oversized camera exports to 2,048px retina quality, and compresses cleanly with zero visual degradation.
   * Or type a filename already in `public/images/` (e.g. `my-photo.jpg`).
   * Or press Enter to skip—if you skip, the folklore archive will automatically use the first `![Alt](/images/...)` picture found in your story!
 
@@ -23,8 +24,19 @@ npm run new:pub 10.1145/3799829.3812522
 ```
 * **PDFs & Thumbnails made easy:**
   * When prompted for the PDF, **drag and drop your PDF from Finder** (e.g. from Downloads/Desktop) directly into the terminal! The script copies it into `public/pubs/` and sets `pdf: "/pubs/..."`.
-  * When prompted for the thumbnail, **drag and drop your teaser image from Finder**! The script copies it into `public/pubs/` and sets `image: "/pubs/..."`.
+  * When prompted for the thumbnail, **drag and drop your teaser image from Finder**! The script automatically optimizes it and sets `image: "/pubs/..."`.
   * The paper is automatically inserted into `src/data/publications.ts` in chronological order.
+
+### 3. Image Optimization & Health Checks
+```bash
+# Check image sizes and potential savings without modifying anything:
+npm run images:check
+
+# Safely optimize and resize oversized backlog images in-place:
+npm run images:optimize
+```
+* Safely normalizes camera photos (>2048px or >400KB) down to high-quality 2,048px retina masters.
+* Preserves exact filenames so no markdown links break.
 
 ---
 
