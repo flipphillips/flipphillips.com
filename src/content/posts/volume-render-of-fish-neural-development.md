@@ -8,6 +8,7 @@ tags: ["development","mathematica","neurons","visualization","volume render"]
 isFolklore: false
 isPublication: false
 excerpt: "A volume rendering (again, via Mathematica) of some developing neural structures in zebrafish. With Aaron Beck and Jen Bonner @ Skidmore."
+image: "/images/uploads/2014/03/VolumeRender.png"
 ---
 
 A volume rendering (again, via _Mathematica_) of some developing neural structures in zebrafish.

@@ -8,6 +8,7 @@ tags: ["listerine","penn","pixar","prank","Teller"]
 isFolklore: true
 isPublication: false
 excerpt: "How to drink a few bottles of Listerine, scare your clients, and ultimately see your clients repeat your prank. I told this story to Penn years ago and he decided it was worthy of a place in their… [Read More](https://flipphillips.com/bloggery/listerine-prank/)"
+image: "/images/boxing.jpg"
 ---
 
 How to drink a few bottles of Listerine, scare your clients, and ultimately see your clients repeat your prank.

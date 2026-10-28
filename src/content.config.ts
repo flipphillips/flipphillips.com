@@ -13,6 +13,7 @@ const posts = defineCollection({
     isFolklore: z.boolean().default(false),
     isPublication: z.boolean().default(false),
     featuredImage: z.string().optional(),
+    image: z.string().optional(),
     excerpt: z.string().optional(),
     publication: z.string().optional(),
   }),

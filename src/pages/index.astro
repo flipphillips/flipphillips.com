@@ -141,7 +141,7 @@ const recentPubs = (highlightedPubs.length > 0 ? highlightedPubs : publications)
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6" data-pagefind-ignore>
       {featuredFolklore.map(post => {
         const imgMatch = post.body?.match(/!\[.*?\]\((.*?)\)/);
-        const image = post.data.featuredImage || (imgMatch ? imgMatch[1] : null);
+        const image = post.data.featuredImage || post.data.image || (imgMatch ? imgMatch[1] : null);
         return (
           <FolkloreCard
             title={post.data.title}

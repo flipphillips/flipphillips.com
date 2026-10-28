@@ -8,6 +8,7 @@ tags: ["folklore","image processing","medical imaging","pixar","volume rendering
 isFolklore: true
 isPublication: false
 excerpt: "A medical imaging workstation – the beginning of volume imaging When I got my interview at Pixar, I was at Ohio State working on volumetric rendering of CT and MR images. There are a few callbacks to that… [Read More](https://flipphillips.com/bloggery/the-pics-2000/)"
+image: "/images/PICS-2000.png"
 ---
 
 A medical imaging workstation – the beginning of volume imaging
