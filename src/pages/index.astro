@@ -16,10 +16,9 @@ allPosts.sort((a, b) => new Date(b.data.date || '').getTime() - new Date(a.data.
 const folklorePosts = allPosts.filter(p => p.data.isFolklore || p.data.categories.includes('Folklore') || p.data.tags.includes('folklore'));
 const featuredFolklore = folklorePosts.slice(0, 4);
 
-// Recent Academic Publications from CV database (peer-reviewed & selected research)
-const recentPubs = publications
-  .filter(p => p.type === 'journal' || p.type === 'conference' || p.highlight)
-  .slice(0, 4);
+// Homepage Selected Works: driven by the 'highlight: true' ("✦ Selected Work") flag
+const highlightedPubs = publications.filter(p => p.highlight);
+const recentPubs = (highlightedPubs.length > 0 ? highlightedPubs : publications).slice(0, 4);
 ---
 
 <BaseLayout>
