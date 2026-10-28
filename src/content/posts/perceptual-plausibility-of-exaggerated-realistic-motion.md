@@ -7,6 +7,7 @@ categories: ["Bloggery","MyScience"]
 tags: ["animation","balls","cognition","experiments","perception"]
 isFolklore: false
 isPublication: false
+publication: "perceptual-plausibility-exaggerated-motion-2024"
 excerpt: "Squashing and stretching our way across the uncanny valley. Abstract The informal heuristic practices of the fine arts have much to offer to our understanding of the appearance of phenomenological reality. One interesting example is the use of exaggeration to… [Read More](https://flipphillips.com/bloggery/perceptual-plausibility-of-exaggerated-realistic-motion/)"
 ---
 

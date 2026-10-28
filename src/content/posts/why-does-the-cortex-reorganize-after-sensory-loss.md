@@ -7,6 +7,7 @@ categories: ["Bloggery","MyScience"]
 tags: ["audition","cortical reorganization","multimodal activations","perception","plasticity","sensation","sensory compensation","sensory loss","touch","Vision"]
 isFolklore: false
 isPublication: false
+publication: "why-does-cortex-reorganize-sensory-loss-2018"
 excerpt: "Investigating the Teleology of Cortical Reorganization A growing body of evidence demonstrates that the brain can reorganize dramatically following sensory loss. Although the existence of such neuroplastic crossmodal changes is not in doubt, the functional significance of these… [Read More](https://flipphillips.com/bloggery/why-does-the-cortex-reorganize-after-sensory-loss/)"
 ---
 

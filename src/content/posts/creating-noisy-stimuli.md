@@ -7,6 +7,7 @@ categories: ["Bloggery","MyScience"]
 tags: ["dg","differential geometry","geometry","glavens","mathematica","noise","randomness","shape","stimuli"]
 isFolklore: false
 isPublication: false
+publication: "creating-noisy-stimuli-2004"
 excerpt: "So much noise. A method for creating a variety of pseudo-random \\`noisy’ stimuli that possess several useful statistical and phenomenal features for psychophysical experimentation is outlined. These stimuli are derived from a pseudo-periodic function known as multidimensional noise…. [Read More](https://flipphillips.com/bloggery/creating-noisy-stimuli/)"
 ---
 

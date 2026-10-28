@@ -7,6 +7,7 @@ categories: ["Bloggery","MyScience"]
 tags: ["aesthetics","beauty","fechner","form","golden section","hogarth","shape"]
 isFolklore: false
 isPublication: false
+publication: "fechners-aesthetics-revisited-2010"
 excerpt: "Isn’t it beautiful? Gustav Fechner is widely respected as a founding father of experimental psychology and psychophysics but fewer know of his interests and work in empirical aesthetics. In the later 1800s, toward the end of his career,… [Read More](https://flipphillips.com/bloggery/fechners-aesthetics-revisited/)"
 ---
 

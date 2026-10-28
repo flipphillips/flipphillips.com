@@ -7,6 +7,7 @@ categories: ["Bloggery","MyScience"]
 tags: ["haptic","highlights","perception","shape","specular","touch","Vision"]
 isFolklore: false
 isPublication: false
+publication: "perceiving-object-shape-specular-highlights-haptics-2016"
 excerpt: "Haptic and visual ‘contours’ It is well known that motion facilitates the visual perception of solid object shape, particularly when surface texture or other identifiable features (e.g., corners) are present. Conventional models of structure-from-motion require the presence of… [Read More](https://flipphillips.com/bloggery/perceiving-object-shape-from-specular-highlight-deformation-boundary-contour-deformation-and-active-haptic-manipulation/)"
 ---
 

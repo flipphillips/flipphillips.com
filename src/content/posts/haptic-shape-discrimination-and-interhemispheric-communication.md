@@ -7,6 +7,7 @@ categories: ["Bloggery","MyScience"]
 tags: ["haptic","shape","touch"]
 isFolklore: false
 isPublication: false
+publication: "haptic-shape-discrimination-interhemispheric-2018"
 excerpt: "Touching. In three experiments participants haptically discriminated object shape using unimanual (single hand explored two objects) and bimanual exploration (both hands were used, but each hand, left or right, explored a separate object). Such haptic exploration (one versus… [Read More](https://flipphillips.com/bloggery/haptic-shape-discrimination-and-interhemispheric-communication/)"
 ---
 

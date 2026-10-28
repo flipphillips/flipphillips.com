@@ -7,6 +7,7 @@ categories: ["Bloggery","MyScience"]
 tags: ["oldstuff","OSU","perception","potato","shape","Vision"]
 isFolklore: false
 isPublication: false
+publication: "perception-surface-orientation-optical-information-1995"
 excerpt: "The first piece of work in did in the “Todd Lab” at OSU. I had just come off five years at Pixar and a year back in grad school in the Architecture and Planning department. I wrote most of… [Read More](https://flipphillips.com/bloggery/the-perception-of-surface-orientation-from-multiple-sources-of-optical-information/)"
 ---
 

@@ -7,6 +7,7 @@ categories: ["Bloggery","MyScience"]
 tags: ["eeg","fmri","functional imaging","medical imaging","OSU"]
 isFolklore: false
 isPublication: false
+publication: "combinational-imaging-mri-eeg-1987"
 excerpt: "Before fMRI (Functional Magnetic Resonance Imaging) existed, I got to do this. We were one of the first labs to do this pre ‘functional’ functional imaging. Instead of volume rendering (which I would move on to Pixar to… [Read More](https://flipphillips.com/bloggery/combinational-imaging-magnetic-resonance-imaging-and-eeg-displayed-simultaneously/)"
 ---
 

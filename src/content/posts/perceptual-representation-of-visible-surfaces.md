@@ -7,6 +7,7 @@ categories: ["Bloggery","MyScience"]
 tags: ["differential geometry","dissertation","form","geometry","moore","P&P","perception","picasso","sculpture","shape"]
 isFolklore: false
 isPublication: false
+publication: "perceptual-representation-visible-surfaces-2003"
 excerpt: "What is a surface, anyway? Two experiments are reported in which we examined the ability of observers to identify landmarks on surfaces from different vantage points. In Experiment 1, observers were asked to mark the local maxima and… [Read More](https://flipphillips.com/bloggery/perceptual-representation-of-visible-surfaces/)"
 ---
 
