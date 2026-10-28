@@ -9,7 +9,7 @@ import sharp from 'sharp';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
-const pubsFile = path.join(rootDir, 'src', 'data', 'publications.ts');
+const pubsFile = path.join(rootDir, 'src', 'data', 'publications.bib');
 const pubsAssetDir = path.join(rootDir, 'public', 'pubs');
 
 class Prompter {
@@ -218,63 +218,83 @@ async function fetchFromDoi(rawDoi) {
   throw new Error(`Could not resolve DOI: ${cleanDoi}`);
 }
 
+function pubToBibEntry(pub) {
+  let bibType = 'article';
+  if (pub.type === 'conference') bibType = 'inproceedings';
+  else if (pub.type === 'techreport') bibType = 'techreport';
+  else if (pub.type === 'book') {
+    bibType = pub.typeLabel === 'Book Chapter' ? 'incollection' : 'book';
+  } else if (pub.type === 'preprint') {
+    bibType = 'article';
+  } else if (pub.type === 'magazine') {
+    bibType = 'misc';
+  }
+
+  const lines = [`@${bibType}{${pub.id},`];
+  lines.push(`  title = {${pub.title}},`);
+  lines.push(`  author = {${pub.authors.join(' and ')}},`);
+
+  if (bibType === 'article') {
+    lines.push(`  journal = {${pub.venue}},`);
+  } else if (bibType === 'inproceedings' || bibType === 'incollection') {
+    lines.push(`  booktitle = {${pub.venue}},`);
+  } else if (bibType === 'techreport') {
+    lines.push(`  institution = {${pub.venue}},`);
+  } else if (bibType === 'book') {
+    lines.push(`  publisher = {${pub.venue}},`);
+  } else {
+    lines.push(`  howpublished = {${pub.venue}},`);
+  }
+
+  lines.push(`  year = {${pub.year}},`);
+  if (pub.volume) lines.push(`  volume = {${pub.volume}},`);
+  if (pub.issue) lines.push(`  number = {${pub.issue}},`);
+  if (pub.pages) lines.push(`  pages = {${pub.pages.replace(/–/g, '--')}},`);
+  if (pub.doi) lines.push(`  doi = {${pub.doi}},`);
+  if (pub.url) lines.push(`  url = {${pub.url}},`);
+  if (pub.pdf) lines.push(`  pdf = {${pub.pdf}},`);
+  if (pub.image) lines.push(`  image = {${pub.image}},`);
+  if (pub.highlight) lines.push(`  highlight = {true},`);
+  if (pub.type === 'preprint') lines.push(`  type = {preprint},`);
+  if (
+    pub.typeLabel &&
+    pub.typeLabel !== 'Journal Article' &&
+    pub.typeLabel !== 'Conference Proceeding' &&
+    pub.typeLabel !== 'Article' &&
+    pub.typeLabel !== 'Preprint'
+  ) {
+    lines.push(`  typelabel = {${pub.typeLabel}},`);
+  }
+  lines.push(`}`);
+  return lines.join('\n');
+}
+
 function insertPublication(fileContent, pub) {
-  if (fileContent.includes(`id: "${pub.id}"`) || fileContent.includes(`id: '${pub.id}'`)) {
-    throw new Error(`A publication with ID "${pub.id}" already exists in publications.ts!`);
+  if (fileContent.includes(`{${pub.id},`)) {
+    throw new Error(`A publication with ID "${pub.id}" already exists in publications.bib!`);
   }
 
-  const lines = [
-    `  {`,
-    `    id: ${JSON.stringify(pub.id)},`,
-    `    year: ${pub.year},`,
-    `    title: ${JSON.stringify(pub.title)},`,
-    `    authors: ${JSON.stringify(pub.authors)},`,
-    `    venue: ${JSON.stringify(pub.venue)},`,
-  ];
-  if (pub.volume) lines.push(`    volume: ${JSON.stringify(pub.volume)},`);
-  if (pub.issue) lines.push(`    issue: ${JSON.stringify(pub.issue)},`);
-  if (pub.pages) lines.push(`    pages: ${JSON.stringify(pub.pages)},`);
-  if (pub.doi) lines.push(`    doi: ${JSON.stringify(pub.doi)},`);
-  if (pub.url) lines.push(`    url: ${JSON.stringify(pub.url)},`);
-  lines.push(`    type: ${JSON.stringify(pub.type)},`);
-  lines.push(`    typeLabel: ${JSON.stringify(pub.typeLabel)},`);
-  if (pub.highlight) lines.push(`    highlight: true,`);
-  if (pub.pdf) lines.push(`    pdf: ${JSON.stringify(pub.pdf)},`);
-  if (pub.image) lines.push(`    image: ${JSON.stringify(pub.image)},`);
+  const entryBlock = pubToBibEntry(pub);
 
-  // Strip trailing comma from last property
-  const lastProp = lines.length - 1;
-  lines[lastProp] = lines[lastProp].replace(/,$/, '');
-  lines.push(`  },`);
+  // Find where this year begins in publications.bib
+  const yearRegex = new RegExp(`year\\s*=\\s*\\{?${pub.year}\\}?`, 'i');
+  const match = fileContent.match(yearRegex);
 
-  const pubBlock = lines.join('\n');
-
-  // Find target year header comment: `// <pub.year>`
-  const yearHeaderRegex = new RegExp(`(//\\s*${pub.year}\\b)`);
-  if (yearHeaderRegex.test(fileContent)) {
-    return fileContent.replace(yearHeaderRegex, `$1\n${pubBlock}`);
-  }
-
-  // If year not found, find where to insert chronologically (descending)
-  const yearMatches = [...fileContent.matchAll(/\/\/\s*(\d{4})\b/g)];
-  for (const ym of yearMatches) {
-    const existingYear = parseInt(ym[1], 10);
-    if (pub.year > existingYear) {
-      const idx = ym.index;
-      const before = fileContent.slice(0, idx);
-      const after = fileContent.slice(idx);
-      return `${before}// ${pub.year}\n${pubBlock}\n\n  ${after.trimStart()}`;
+  if (match) {
+    // Find the `@` preceding this match to insert right before the first entry of that year
+    const atIdx = fileContent.lastIndexOf('@', match.index);
+    if (atIdx !== -1) {
+      return `${fileContent.slice(0, atIdx)}${entryBlock}\n\n${fileContent.slice(atIdx)}`;
     }
   }
 
-  // Older than existing years: insert at end of publications array
-  const lastBracket = fileContent.lastIndexOf('];');
-  if (lastBracket !== -1) {
-    const before = fileContent.slice(0, lastBracket).trimEnd();
-    return `${before}\n\n  // ${pub.year}\n${pubBlock}\n];\n`;
+  // If new year or not found: find first @ after header to insert at top
+  const firstAt = fileContent.indexOf('@');
+  if (firstAt !== -1) {
+    return `${fileContent.slice(0, firstAt)}${entryBlock}\n\n${fileContent.slice(firstAt)}`;
   }
 
-  throw new Error('Could not find insertion position in publications.ts');
+  return `${fileContent.trimEnd()}\n\n${entryBlock}\n`;
 }
 
 async function main() {
@@ -366,21 +386,27 @@ async function main() {
     pubData.image = image;
   }
 
-  prompter.close();
-
-  // Read and update publications.ts
+  // Read and update publications.bib
   const currentContent = fs.readFileSync(pubsFile, 'utf-8');
   const updatedContent = insertPublication(currentContent, pubData);
 
   fs.writeFileSync(pubsFile, updatedContent, 'utf-8');
 
-  console.log(`\n🎉 Successfully added "${pubData.title}" to src/data/publications.ts!`);
+  console.log(`\n🎉 Successfully added "${pubData.title}" to src/data/publications.bib!`);
   if (pubData.pdf) {
     console.log(`📄 PDF linked: ${pubData.pdf}`);
   }
   if (pubData.image) {
     console.log(`🖼️  Thumbnail linked: ${pubData.image}`);
   }
+
+  // Check if fpcv exists and auto-sync
+  const fpcvBib = path.join(process.env.HOME || '', 'GitHub', 'fpcv', 'publications.bib');
+  if (fs.existsSync(path.dirname(fpcvBib))) {
+    fs.copyFileSync(pubsFile, fpcvBib);
+    console.log(`🔄 Automatically synced to ${fpcvBib}`);
+  }
+  prompter.close();
 }
 
 main().catch((err) => {

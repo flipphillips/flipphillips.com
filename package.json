@@ -13,7 +13,10 @@
     "new:post": "node scripts/new-post.js",
     "new:pub": "node scripts/new-pub.js",
     "images:optimize": "node scripts/optimize-images.js",
-    "images:check": "node scripts/optimize-images.js --dry-run"
+    "images:check": "node scripts/optimize-images.js --dry-run",
+    "cv:sync": "node scripts/sync-cv.js",
+    "cv:diff": "node scripts/sync-cv.js --diff",
+    "cv:latex": "node scripts/sync-cv.js --latex"
   },
   "keywords": [],
   "author": "",
