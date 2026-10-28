@@ -27,6 +27,7 @@ export interface Publication {
   url?: string;
   pdf?: string;
   image?: string;
+  post?: string;
   highlight?: boolean;
 }
 
@@ -202,6 +203,7 @@ export function bibEntryToPublication(entry: BibEntry): Publication {
   if (f.url) pub.url = cleanBibString(f.url);
   if (f.pdf) pub.pdf = cleanBibString(f.pdf);
   if (f.image) pub.image = cleanBibString(f.image);
+  if (f.post) pub.post = cleanBibString(f.post);
   if (f.highlight === 'true' || f.highlight === '1') pub.highlight = true;
 
   return pub;
@@ -214,3 +216,4 @@ export function parsePublicationsFromBib(bibContent: string): Publication[] {
   const entries = parseBibTeX(bibContent);
   return entries.map(bibEntryToPublication).sort((a, b) => b.year - a.year);
 }
+

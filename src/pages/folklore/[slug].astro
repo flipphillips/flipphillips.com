@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection, render } from 'astro:content';
+import { publications } from '../../data/publications';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
@@ -8,12 +9,12 @@ export async function getStaticPaths() {
     const slug = (post.data.slug || post.id.replace(/\.md$/, ''));
     return {
       params: { slug: decodeURIComponent(slug) },
-      props: { post },
+      props: { post, slug },
     };
   });
 }
 
-const { post } = Astro.props;
+const { post, slug } = Astro.props;
 const { Content } = await render(post);
 
 const formattedDate = post.data.date ? new Date(post.data.date).toLocaleDateString('en-US', {
@@ -21,6 +22,13 @@ const formattedDate = post.data.date ? new Date(post.data.date).toLocaleDateStri
   month: 'long',
   day: 'numeric'
 }) : '';
+
+// Find companion publication if linked via frontmatter or bibtex post field
+const linkedPub = publications.find(p =>
+  p.id === post.data.publication ||
+  (p.post && (p.post.includes(slug) || p.post.endsWith(`/${slug}`)))
+);
+const pubDoiUrl = linkedPub?.doi ? (linkedPub.doi.startsWith('http') ? linkedPub.doi : `https://doi.org/${linkedPub.doi}`) : null;
 ---
 
 <BaseLayout title={`${post.data.title} — Folklore — Flip Phillips`} description={post.data.excerpt}>
@@ -60,6 +68,46 @@ const formattedDate = post.data.date ? new Date(post.data.date).toLocaleDateStri
         </div>
       )}
     </header>
+
+    {linkedPub && (
+      <aside class="mb-10 p-5 rounded-2xl bg-blue-50/70 dark:bg-blue-950/30 border border-blue-200/80 dark:border-blue-900/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="min-w-0">
+          <div class="flex items-center gap-2 text-xs font-mono text-blue-700 dark:text-blue-300 font-semibold mb-1">
+            <span>📄 Companion Academic Publication</span>
+            <span>&bull;</span>
+            <span>{linkedPub.year}</span>
+          </div>
+          <p class="text-base font-serif font-bold text-neutral-900 dark:text-neutral-100 leading-snug">
+            {linkedPub.title}
+          </p>
+          <p class="text-xs text-neutral-600 dark:text-neutral-400 font-sans italic mt-1">
+            {linkedPub.venue}
+          </p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0 font-mono text-xs">
+          {linkedPub.pdf && (
+            <a
+              href={linkedPub.pdf}
+              target="_blank"
+              class="px-3 py-1.5 rounded-lg bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 hover:opacity-90 font-medium inline-flex items-center gap-1.5 shadow-xs"
+            >
+              <span>📄</span>
+              <span>PDF</span>
+            </a>
+          )}
+          {pubDoiUrl && (
+            <a
+              href={pubDoiUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-3 py-1.5 rounded-lg border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-600 text-neutral-700 dark:text-neutral-300 inline-flex items-center gap-1.5 font-medium transition-colors"
+            >
+              <span>DOI &rarr;</span>
+            </a>
+          )}
+        </div>
+      </aside>
+    )}
 
     <!-- Content Body with Markdown / Typography -->
     <div class="prose prose-neutral dark:prose-invert prose-lg max-w-none font-sans

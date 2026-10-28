@@ -14,6 +14,7 @@ const posts = defineCollection({
     isPublication: z.boolean().default(false),
     featuredImage: z.string().optional(),
     excerpt: z.string().optional(),
+    publication: z.string().optional(),
   }),
 });
 
