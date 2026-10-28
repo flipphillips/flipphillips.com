@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Search — Flip Phillips"
+  description="Search across folklore stories, academic publications, datasets, and essays."
+>
+  <div class="max-w-3xl mx-auto py-4" data-pagefind-ignore>
+    <!-- Header -->
+    <header class="mb-8 pb-6 border-b border-neutral-200 dark:border-neutral-800">
+      <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-blue-400 font-semibold mb-2">
+        <span>🔍 Global Archive Search</span>
+      </div>
+      <h1 class="text-3xl md:text-4xl font-serif font-bold text-neutral-900 dark:text-neutral-100">
+        Search Everything
+      </h1>
+      <p class="text-sm text-neutral-600 dark:text-neutral-400 mt-2 font-sans leading-relaxed">
+        Fast, instant static search across all 140+ folklore stories, 55+ research publications, 3D laser datasets, and course archives.
+      </p>
+
+      <!-- Suggested Quick Searches -->
+      <div class="mt-4 flex flex-wrap items-center gap-2 text-xs font-mono text-neutral-500">
+        <span class="text-neutral-400 dark:text-neutral-500">Popular:</span>
+        {['Pixar', 'Haptics', 'Gibson', 'Feelies', 'Spectrophotometry', 'Materials', 'Laser', 'VSS', 'Motion'].map(term => (
+          <button
+            type="button"
+            class="search-pill px-2.5 py-1 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-blue-50 hover:text-blue-600 dark:hover:bg-blue-950/60 dark:hover:text-blue-300 transition-colors cursor-pointer"
+            data-term={term}
+          >
+            #{term}
+          </button>
+        ))}
+      </div>
+    </header>
+
+    <!-- Pagefind Container -->
+    <div id="pagefind-search" class="min-h-[400px]"></div>
+  </div>
+
+  <!-- Pagefind Assets -->
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
+      // Initialize Pagefind UI
+      const pf = new PagefindUI({
+        element: "#pagefind-search",
+        showImages: true,
+        showSubResults: true,
+        autofocus: true,
+        translations: {
+          placeholder: "Search papers, folklore, 3D models, keywords... (press Esc to clear)",
+          clear_search: "Clear",
+          zero_results: "No matches found for \"[SEARCH_TERM]\"",
+          many_results: "[COUNT] matches found for \"[SEARCH_TERM]\"",
+          one_result: "1 match found for \"[SEARCH_TERM]\"",
+        }
+      });
+
+      // Quick-search pill click handler
+      document.querySelectorAll('.search-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          const term = pill.getAttribute('data-term');
+          const input = document.querySelector('.pagefind-ui__search-input');
+          if (input && term) {
+            input.value = term;
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+            input.focus();
+          }
+        });
+      });
+    });
+  </script>
+
+  <style is:global>
+    /* Theme Pagefind UI to match IBM Plex typography & site colors */
+    :root {
+      --pagefind-ui-scale: 0.95;
+      --pagefind-ui-primary: #2563eb;
+      --pagefind-ui-text: #171717;
+      --pagefind-ui-background: #ffffff;
+      --pagefind-ui-border: #e5e5e5;
+      --pagefind-ui-tag: #f3f4f6;
+      --pagefind-ui-border-width: 1px;
+      --pagefind-ui-border-radius: 12px;
+      --pagefind-ui-image-border-radius: 8px;
+      --pagefind-ui-image-box-ratio: 16 / 9;
+      --pagefind-ui-font: 'IBM Plex Sans', -apple-system, sans-serif;
+    }
+
+    html.dark {
+      --pagefind-ui-primary: #60a5fa;
+      --pagefind-ui-text: #f5f5f5;
+      --pagefind-ui-background: #171717;
+      --pagefind-ui-border: #262626;
+      --pagefind-ui-tag: #262626;
+    }
+
+    /* Polish the search input */
+    .pagefind-ui__search-input {
+      font-family: 'IBM Plex Sans', sans-serif !important;
+      font-size: 15px !important;
+      padding: 12px 16px 12px 42px !important;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      border-color: #e5e5e5 !important;
+      transition: all 0.2s ease;
+    }
+
+    html.dark .pagefind-ui__search-input {
+      background-color: #171717 !important;
+      border-color: #262626 !important;
+      color: #f5f5f5 !important;
+    }
+
+    .pagefind-ui__search-input:focus {
+      outline: none !important;
+      border-color: #3b82f6 !important;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
+    }
+
+    /* Result cards */
+    .pagefind-ui__result {
+      padding: 20px 0 !important;
+      border-bottom: 1px solid #f3f4f6 !important;
+    }
+
+    html.dark .pagefind-ui__result {
+      border-bottom: 1px solid #262626 !important;
+    }
+
+    .pagefind-ui__result-link {
+      color: #171717 !important;
+      font-family: 'IBM Plex Serif', serif !important;
+      font-weight: 700 !important;
+      font-size: 18px !important;
+      text-decoration: none !important;
+      transition: color 0.15s ease;
+    }
+
+    html.dark .pagefind-ui__result-link {
+      color: #f5f5f5 !important;
+    }
+
+    .pagefind-ui__result-link:hover {
+      color: #2563eb !important;
+    }
+
+    html.dark .pagefind-ui__result-link:hover {
+      color: #60a5fa !important;
+    }
+
+    .pagefind-ui__result-excerpt {
+      font-family: 'IBM Plex Sans', sans-serif !important;
+      font-size: 14px !important;
+      line-height: 1.6 !important;
+      color: #525252 !important;
+      margin-top: 6px !important;
+    }
+
+    html.dark .pagefind-ui__result-excerpt {
+      color: #a3a3a3 !important;
+    }
+
+    /* Keyword highlight styling */
+    .pagefind-ui__result-excerpt mark {
+      background-color: #fef08a !important;
+      color: #854d0e !important;
+      padding: 1px 4px !important;
+      border-radius: 4px !important;
+      font-weight: 500 !important;
+    }
+
+    html.dark .pagefind-ui__result-excerpt mark {
+      background-color: #854d0e/60 !important;
+      color: #fef08a !important;
+    }
+
+    .pagefind-ui__button {
+      font-family: 'IBM Plex Mono', monospace !important;
+      font-size: 12px !important;
+      padding: 8px 16px !important;
+      border-radius: 8px !important;
+    }
+  </style>
+</BaseLayout>

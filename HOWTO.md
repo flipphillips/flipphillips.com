@@ -38,6 +38,11 @@ npm run images:optimize
 * Safely normalizes camera photos (>2048px or >400KB) down to high-quality 2,048px retina masters.
 * Preserves exact filenames so no markdown links break.
 
+### 4. Global Search (`/search` or `Cmd+K`)
+* The site includes instant, full-text client-side search powered by **Pagefind**.
+* **Shortcut:** Press **`Cmd+K`** (or `Ctrl+K`) anywhere on the site to jump straight to search.
+* **Build Indexing:** Search is automatically built during `npm run build`. You can also re-index locally via `npm run pagefind`.
+
 ---
 
 ## Astro Core Concepts for Beginners

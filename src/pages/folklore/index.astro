@@ -43,7 +43,7 @@ const folkloreCount = allPosts.filter(p => p.data.isFolklore || p.data.categorie
     </header>
 
     <!-- Post list -->
-    <div class="space-y-8" id="posts-list">
+    <div class="space-y-8" id="posts-list" data-pagefind-ignore>
       {allPosts.map(post => {
         const formattedDate = post.data.date ? new Date(post.data.date).toLocaleDateString('en-US', {
           year: 'numeric',

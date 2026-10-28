@@ -98,7 +98,7 @@ const highlightCount = sortedPubs.filter(p => p.highlight).length;
         }
 
         return (
-          <div class="pub-item transition-opacity" data-categories={categories.join(' ')}>
+          <div id={pub.id} class="pub-item transition-opacity scroll-mt-24" data-categories={categories.join(' ')}>
             <PublicationCard pub={pub} />
           </div>
         );

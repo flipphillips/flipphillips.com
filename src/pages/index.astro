@@ -34,7 +34,7 @@ const recentPubs = (publicationPosts.length > 0 ? publicationPosts : allPosts).s
           Professor of Motion Picture Science &bull; Rochester Institute of Technology
         </p>
         <p class="mt-4 text-base text-neutral-700 dark:text-neutral-300 leading-relaxed font-sans">
-          My research and teaching focuses on the human perception of materials, 3D shape, and motion — primarily through vision and touch. My trajectory spans undergraduate training in architecture and computer graphics at OSU’s Computer Graphics Research Group, UI and animation at <strong>Pixar Animation Studios</strong> (where I was the original <em>‘Animation Scientist’</em>), and cognitive science, neuroscience, and mathematical modeling at OSU, Skidmore, and RIT.
+          My research and teaching focuses on the human perception of materials, 3D shape, and motion — primarily through vision and touch. My trajectory spans undergraduate training in architecture and computer graphics at <strong>OSU’s Computer Graphics Research Group</strong>, UI and animation at <strong>Pixar Animation Studios</strong> (where I was the original <em>‘Animation Scientist’</em>), and cognitive science, neuroscience, and mathematical modeling at OSU, Skidmore, and RIT.
         </p>
 
         <div class="mt-6 flex flex-wrap gap-3 font-sans">
@@ -136,7 +136,7 @@ const recentPubs = (publicationPosts.length > 0 ? publicationPosts : allPosts).s
       </a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" data-pagefind-ignore>
       {featuredFolklore.map(post => {
         const imgMatch = post.body?.match(/!\[.*?\]\((.*?)\)/);
         const image = post.data.featuredImage || (imgMatch ? imgMatch[1] : null);
@@ -173,7 +173,7 @@ const recentPubs = (publicationPosts.length > 0 ? publicationPosts : allPosts).s
       </a>
     </div>
 
-    <div class="divide-y divide-neutral-200 dark:divide-neutral-800">
+    <div class="divide-y divide-neutral-200 dark:divide-neutral-800" data-pagefind-ignore>
       {recentPubs.map(pub => (
         <article class="py-5 first:pt-0 last:pb-0 flex flex-col md:flex-row md:items-baseline justify-between gap-4">
           <div class="max-w-2xl">
