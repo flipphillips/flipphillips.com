@@ -28,7 +28,9 @@ export const publications: Publication[] = [
     issue: "6",
     type: "journal",
     typeLabel: "Journal Article",
-    highlight: true
+    highlight: true,
+    pdf: "/pubs/Simion2026-SpectralRendering.pdf",
+    image: "/pubs/Simion2026-thumb.png"
   },
   {
     id: "social-attribution-newly-sighted-2026",

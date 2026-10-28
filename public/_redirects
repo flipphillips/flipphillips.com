@@ -1,0 +1,5 @@
+/blog /folklore 301
+/blog/* /folklore/:splat 301
+/bloggery /folklore 301
+/bloggery/* /folklore/:splat 301
+

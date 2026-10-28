@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "dev",
+      "problemMatcher": [],
+      "label": "Astro: Start Dev Server",
+      "detail": "Starts the local development server at http://localhost:4321 with hot reloading",
+      "isBackground": true
+    },
+    {
+      "type": "npm",
+      "script": "build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "label": "Astro: Build Site",
+      "detail": "Runs 'astro build' to generate static production assets in ./dist"
+    },
+    {
+      "type": "npm",
+      "script": "preview",
+      "problemMatcher": [],
+      "label": "Astro: Preview Build",
+      "detail": "Runs 'astro preview' to inspect the built static files locally"
+    }
+  ]
+}
+
