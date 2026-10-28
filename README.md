@@ -22,6 +22,20 @@ npm run build
 npm run preview
 ```
 
+### Content Authoring Helpers
+
+```bash
+# Create a new Folklore story or Dispatch
+npm run new:post "Your Story Title"
+# or run interactively:
+npm run new:post
+
+# Add an academic publication via DOI (auto-fetches metadata from Crossref)
+npm run new:pub 10.1145/3799829.3812522
+# or run interactively for manual entry:
+npm run new:pub
+```
+
 ---
 
 ## Project Structure: Where Things Live

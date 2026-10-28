@@ -26,6 +26,20 @@
       "problemMatcher": [],
       "label": "Astro: Preview Build",
       "detail": "Runs 'astro preview' to inspect the built static files locally"
+    },
+    {
+      "type": "npm",
+      "script": "new:post",
+      "problemMatcher": [],
+      "label": "Astro: New Post / Folklore Story",
+      "detail": "Interactively create a new Folklore story or Dispatch in src/content/posts/"
+    },
+    {
+      "type": "npm",
+      "script": "new:pub",
+      "problemMatcher": [],
+      "label": "Astro: Add Publication (via DOI)",
+      "detail": "Fetch metadata by DOI and insert into src/data/publications.ts"
     }
   ]
 }

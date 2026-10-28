@@ -8,7 +8,9 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "new:post": "node scripts/new-post.js",
+    "new:pub": "node scripts/new-pub.js"
   },
   "keywords": [],
   "author": "",

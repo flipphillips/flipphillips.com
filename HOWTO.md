@@ -1,4 +1,30 @@
-# Howto
+# Howto & Content Workflows
+
+---
+
+## Quick Authoring Workflows
+
+### 1. Adding a Folklore / Dispatch Post
+```bash
+npm run new:post
+# or pass the title directly:
+npm run new:post "Your Story Title"
+```
+* **Thumbnails made easy:** When prompted for a thumbnail, you can:
+  * **Drag and drop** any image file from Finder directly into the terminal window! It will automatically copy it into `public/images/` and wire up `featuredImage` in your frontmatter.
+  * Or type a filename already in `public/images/` (e.g. `my-photo.jpg`).
+  * Or press Enter to skip—if you skip, the folklore archive will automatically use the first `![Alt](/images/...)` picture found in your story!
+
+### 2. Adding an Academic Publication (with PDF & Thumbnail)
+```bash
+npm run new:pub <DOI>
+# Example:
+npm run new:pub 10.1145/3799829.3812522
+```
+* **PDFs & Thumbnails made easy:**
+  * When prompted for the PDF, **drag and drop your PDF from Finder** (e.g. from Downloads/Desktop) directly into the terminal! The script copies it into `public/pubs/` and sets `pdf: "/pubs/..."`.
+  * When prompted for the thumbnail, **drag and drop your teaser image from Finder**! The script copies it into `public/pubs/` and sets `image: "/pubs/..."`.
+  * The paper is automatically inserted into `src/data/publications.ts` in chronological order.
 
 ---
 
