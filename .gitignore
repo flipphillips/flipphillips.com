@@ -3,5 +3,6 @@ dist/
 .astro/
 .wrangler/
 public/pagefind/
+_unused_images_review/
 .DS_Store
 *.log

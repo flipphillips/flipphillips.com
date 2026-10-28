@@ -51,6 +51,15 @@ npm run images:check
 
 # Optimize and compress oversized images in public/images in-place
 npm run images:optimize
+
+# Audit images and report unreferenced files / legacy artifacts
+npm run images:audit
+
+# Move unreferenced images to _unused_images_review/ for inspection
+npm run images:clean
+
+# Restore moved images back to public/images/
+npm run images:restore
 ```
 
 ---

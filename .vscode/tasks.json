@@ -78,6 +78,27 @@
     },
     {
       "type": "npm",
+      "script": "images:audit",
+      "problemMatcher": [],
+      "label": "Astro: Audit Unused Images (Dry Run)",
+      "detail": "Scans public/images for unreferenced images and reports breakdown"
+    },
+    {
+      "type": "npm",
+      "script": "images:clean",
+      "problemMatcher": [],
+      "label": "Astro: Move Unused Images to _unused_images_review/",
+      "detail": "Safely moves unreferenced images to _unused_images_review/ and generates MANIFEST.md"
+    },
+    {
+      "type": "npm",
+      "script": "images:restore",
+      "problemMatcher": [],
+      "label": "Astro: Restore Moved Images back to public/images/",
+      "detail": "Restores any moved images from _unused_images_review/ back to public/images/"
+    },
+    {
+      "type": "npm",
       "script": "pagefind",
       "problemMatcher": [],
       "label": "Astro: Build Search Index (Pagefind)",

@@ -23,6 +23,9 @@ You do **not** need to memorize or type shell commands in the terminal. All auth
 | **`CV: Generate Formatted LaTeX for cv.tex`** | Formats publications into the exact `\yearsheader{}` LaTeX macro format for `cv.tex` |
 | **`Astro: Check Image Sizes (Dry Run)`** | Scans `public/images/` and reports oversized photos & potential space savings |
 | **`Astro: Optimize Images (In-Place)`** | Safely resizes & compresses backlog photos down to 2,048px retina masters |
+| **`Astro: Audit Unused Images (Dry Run)`** | Scans `public/images/` for unreferenced images and reports breakdown |
+| **`Astro: Move Unused Images to Review`** | Safely moves unreferenced images to `_unused_images_review/` with a manifest |
+| **`Astro: Restore Moved Images`** | Restores all files from `_unused_images_review/` back to `public/images/` |
 | **`Astro: Build Search Index (Pagefind)`**| Re-indexes site content so local dev search is fresh |
 
 ---
@@ -150,7 +153,28 @@ npm run images:optimize
 * **Non-image files protected**: PDFs uploaded to `public/images/uploads/` (e.g. poster sessions, slides) are recognized and never touched.
 * **Size gate**: If conforming an image ever results in a larger file (rare, but can happen on tiny icons), the original file is preserved.
 
-### 4. Global Search (`/search` or `Cmd+K`)
+---
+
+### 6. Auditing & Reviewing Unused Images
+If `public/images/` accumulates unreferenced assets or legacy WordPress artifacts:
+```bash
+# Audit images and print breakdown without modifying anything:
+npm run images:audit
+
+# Safely move unreferenced images to _unused_images_review/ with a manifest:
+npm run images:clean
+
+# Restore all moved images back to public/images/ if needed:
+npm run images:restore
+```
+
+* **Where do they go?** Unused files are staged in `_unused_images_review/` (preserving subfolder structure like `uploads/2013/...`).
+* **Manifest generated:** [`_unused_images_review/MANIFEST.md`](file:///Users/fxpppr/GitHub/flipphillips.com/_unused_images_review/MANIFEST.md) lists every moved file, its size, and where it originally came from.
+* **100% Reversible:** You can drag any file back into `public/images/` or run `npm run images:restore` anytime.
+
+---
+
+### 7. Global Search (`/search` or `Cmd+K`)
 * The site includes instant, full-text client-side search powered by **Pagefind**.
 * **Shortcut:** Press **`Cmd+K`** (or `Ctrl+K`) anywhere on the site to jump straight to search.
 * **Build Indexing:** Search is automatically built during `npm run build`. You can also re-index locally via `npm run pagefind`.

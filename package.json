@@ -14,6 +14,9 @@
     "new:pub": "node scripts/new-pub.js",
     "images:optimize": "node scripts/optimize-images.js",
     "images:check": "node scripts/optimize-images.js --dry-run",
+    "images:audit": "node scripts/find-unused-images.js",
+    "images:clean": "node scripts/find-unused-images.js --move",
+    "images:restore": "node scripts/find-unused-images.js --restore",
     "cv:sync": "node scripts/sync-cv.js",
     "cv:diff": "node scripts/sync-cv.js --diff",
     "cv:latex": "node scripts/sync-cv.js --latex"
