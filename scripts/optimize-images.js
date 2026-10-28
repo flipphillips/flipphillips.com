@@ -26,7 +26,7 @@ function getArgValue(prefix, defaultVal) {
 
 const MAX_DIM = parseInt(getArgValue('--max-dim', '2048'), 10);
 const QUALITY = parseInt(getArgValue('--quality', '85'), 10);
-const TARGET_DIR = path.resolve('public/images');
+const TARGET_DIRS = [path.resolve('public/images'), path.resolve('public/pubs')].filter(d => fs.existsSync(d));
 
 function formatBytes(bytes) {
   if (bytes === 0) return '0 B';
@@ -112,18 +112,16 @@ async function optimizeImage(filePath) {
 async function main() {
   console.log(`\n🖼️  Image Optimizer for flipphillips.com`);
   console.log(`----------------------------------------`);
-  console.log(`Target:    ${TARGET_DIR}`);
+  console.log(`Targets:   ${TARGET_DIRS.map(d => path.relative(process.cwd(), d)).join(', ')}`);
   console.log(`Max Dim:   ${MAX_DIM}px`);
   console.log(`Quality:   ${QUALITY}%`);
   console.log(`Mode:      ${isDryRun ? '🔍 DRY RUN (no files modified)' : '⚡ LIVE (optimizing in place)'}`);
   console.log(`----------------------------------------\n`);
 
-  if (!fs.existsSync(TARGET_DIR)) {
-    console.error(`Target directory ${TARGET_DIR} does not exist!`);
-    process.exit(1);
+  let files = [];
+  for (const dir of TARGET_DIRS) {
+    files = files.concat(await scanDirectory(dir));
   }
-
-  const files = await scanDirectory(TARGET_DIR);
   console.log(`Found ${files.length} image files to inspect.\n`);
 
   let totalOrigBytes = 0;

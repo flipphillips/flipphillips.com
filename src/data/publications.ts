@@ -33,17 +33,6 @@ export const publications: Publication[] = [
     image: "/pubs/Simion2026-thumb.png"
   },
   {
-    id: "social-attribution-newly-sighted-2026",
-    year: 2026,
-    title: "Social attribution behavior in newly sighted children",
-    authors: ["D Verma", "M Yadav", "P Gupta", "C Ralekar", "S Ben-Ami", "S Gilad-Gutnick", "S Riskin", "F Phillips", "K Jazayeri", "S Ganesh", "P Sinha"],
-    venue: "Nature: Scientific Reports",
-    volume: "16",
-    type: "journal",
-    typeLabel: "Journal Article",
-    highlight: true
-  },
-  {
     id: "rolling-through-pipeline-siggraph-2026",
     year: 2026,
     title: "Rolling Through the Pipeline: A Course Model for Virtual Production Education",
@@ -52,7 +41,9 @@ export const publications: Publication[] = [
     doi: "10.1145/3799829.3812522",
     type: "conference",
     typeLabel: "Conference Proceeding",
-    highlight: true
+    highlight: true,
+    pdf: "/pubs/Phillips2026-RollingThroughPipeline.pdf",
+    image: "/pubs/Phillips2026-thumb.png"
   },
   {
     id: "compression-recompression-jpeg-2026",
@@ -61,7 +52,10 @@ export const publications: Publication[] = [
     authors: ["F Phillips"],
     venue: "Wolfram Community (Staff Pick)",
     type: "magazine",
-    typeLabel: "Article"
+    typeLabel: "Article",
+    url: "https://community.wolfram.com/groups/-/m/t/3678635",
+    image: "/pubs/Phillips2026a-thumb.png",
+    highlight: true
   },
 
   // 2025
@@ -96,15 +90,15 @@ export const publications: Publication[] = [
     type: "magazine",
     typeLabel: "Article"
   },
-  {
-    id: "in-memory-michael-trott-2025",
-    year: 2025,
-    title: "In Memory of Michael Trott (1959–2025): Scientist, Mentor, Friend",
-    authors: ["F Phillips"],
-    venue: "Wolfram Community",
-    type: "magazine",
-    typeLabel: "Article"
-  },
+  // {
+  //   id: "in-memory-michael-trott-2025",
+  //   year: 2025,
+  //   title: "In Memory of Michael Trott (1959–2025): Scientist, Mentor, Friend",
+  //   authors: ["F Phillips"],
+  //   venue: "Wolfram Community",
+  //   type: "magazine",
+  //   typeLabel: "Article"
+  // },
 
   // 2024
   {
@@ -135,7 +129,19 @@ export const publications: Publication[] = [
     type: "journal",
     typeLabel: "Journal Article"
   },
-
+  {
+    id: "social-attribution-newly-sighted-2023",
+    year: 2023,
+    title: "Social attribution behavior in newly sighted children",
+    authors: ["D Verma", "M Yadav", "P Gupta", "C Ralekar", "S Ben-Ami", "S Gilad-Gutnick", "S Riskin", "F Phillips", "K Jazayeri", "S Ganesh", "P Sinha"],
+    venue: "Journal of Vision",
+    volume: "23",
+    issue: "9",
+    doi: "10.1167/jov.23.9.5264",
+    type: "journal",
+    typeLabel: "Journal Article",
+    highlight: true
+  },
   // 2022
   {
     id: "identification-surface-concavities-2022",
