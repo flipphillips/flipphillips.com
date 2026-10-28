@@ -8,6 +8,7 @@ tags: ["history","pixar"]
 isFolklore: true
 isPublication: false
 excerpt: "We did a whole bunch of commercial for Tropicana. This was our second — This was the second in a series we did for Tropicana. The first one we did was much simpler, a logo and orange in… [Read More](https://flipphillips.com/folklore/tropicana-commercials/)"
+featuredImage: "/images/tropicana.png"
 ---
 
 We did a whole bunch of commercial for Tropicana. This was our second —

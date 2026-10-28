@@ -7,7 +7,7 @@ categories: ["Bloggery","MyScience"]
 tags: ["perception","shape","veiled virgin","virgin","visit"]
 isFolklore: false
 isPublication: false
-image: "/pubs/phillipsfleming-thumb.png"
+featuredImage: "/pubs/phillipsfleming-thumb.png"
 publication: "veiled-virgin-visual-segmentation-shape-by-cause-2020"
 excerpt: "The geometry of the physical object does not represent the visual experience. Three-dimensional (3D) shape perception is one of the most important functions of vision. It is crucial for many tasks, from object recognition to tool use, and… [Read More](https://flipphillips.com/bloggery/the-veiled-virgin-illustrates-visual-segmentation-of-shape-by-cause/)"
 ---
