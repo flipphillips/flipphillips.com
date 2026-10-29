@@ -24,6 +24,11 @@ You can use it to build any of a variety of cameras ranging from LIDAR depth, st
 
 Hey look- captured in the array, and re-rendered with a fresh camera path from those captures!
 
+<video controls autoplay muted loop playsinline class="w-full rounded-xl shadow-md my-6">
+  <source src="https://ritmps.github.io/chumps/assets/videos/rockpaper.mp4" type="video/mp4" />
+  <p>Your browser does not support the video tag. Here is a <a href="https://ritmps.github.io/chumps/assets/videos/rockpaper.mp4">link to the video</a>.</p>
+</video>
+
 [![Mo](/images/uploads/2026/10/IMG_2956.jpeg)](/images/uploads/2026/10/IMG_2956.jpeg?ssl=1)
 
 [^1]: I was watching The Simpsons, Moe had just mentioned being a “stumblebum chump”. S18E06
