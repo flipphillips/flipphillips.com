@@ -29,7 +29,11 @@ Hey look- captured in the array, and re-rendered with a fresh camera path from t
   <p>Your browser does not support the video tag. Here is a <a href="https://ritmps.github.io/chumps/assets/videos/rockpaper.mp4">link to the video</a>.</p>
 </video>
 
+* * *
+
 [![Mo](/images/uploads/2026/10/IMG_2956.jpeg)](/images/uploads/2026/10/IMG_2956.jpeg?ssl=1)
+
+* * *
 
 [^1]: I was watching The Simpsons, Moe had just mentioned being a “stumblebum chump”. S18E06
 [^2]: We worked on it. No conclusions. That’s for later.
