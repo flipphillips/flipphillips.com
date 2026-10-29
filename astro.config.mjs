@@ -3,6 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import { rehypeVideo } from './src/plugins/rehype-video.js';
 
 export default defineConfig({
   redirects: {
@@ -17,6 +18,6 @@ export default defineConfig({
   integrations: [mdx()],
   markdown: {
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex],
+    rehypePlugins: [rehypeKatex, rehypeVideo],
   },
 });
