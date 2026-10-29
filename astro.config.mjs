@@ -4,6 +4,7 @@ import mdx from '@astrojs/mdx';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import { rehypeVideo } from './src/plugins/rehype-video.js';
+import { rehypeWolfram } from './src/plugins/rehype-wolfram.js';
 
 export default defineConfig({
   redirects: {
@@ -18,6 +19,6 @@ export default defineConfig({
   integrations: [mdx()],
   markdown: {
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex, rehypeVideo],
+    rehypePlugins: [rehypeKatex, rehypeVideo, rehypeWolfram],
   },
 });

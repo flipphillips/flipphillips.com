@@ -112,5 +112,66 @@ const {
         renderMermaid();
       }
     </script>
+
+    <!-- Wolfram Cloud Notebook Embedder -->
+    <script>
+      async function initWolframEmbeds() {
+        const cards = document.querySelectorAll<HTMLElement>('.wolfram-embed-card[data-wolfram-url]');
+        if (cards.length === 0) return;
+
+        let embedFn: any = null;
+        try {
+          const mod = await import('wolfram-notebook-embedder');
+          embedFn = mod.embed || mod.default?.embed || mod.default;
+        } catch (err) {
+          console.error('Failed to load wolfram-notebook-embedder package:', err);
+          return;
+        }
+
+        if (typeof embedFn !== 'function') {
+          console.error('embed function not found in wolfram-notebook-embedder');
+          return;
+        }
+
+        for (const card of Array.from(cards)) {
+          const url = card.dataset.wolframUrl;
+          const container = card.querySelector<HTMLElement>('.wolfram-embed-container');
+          if (!url || !container || container.dataset.initialized) continue;
+          container.dataset.initialized = 'true';
+
+          const observer = new IntersectionObserver((entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                observer.disconnect();
+                embedFn(url, container, {
+                  width: null,
+                  maxHeight: Infinity,
+                  allowInteract: true,
+                  showBorder: false,
+                  showRenderProgress: true
+                }).then(() => {
+                  const loading = container.querySelector('.wolfram-embed-loading');
+                  if (loading) loading.remove();
+                }).catch((err: any) => {
+                  console.error('Failed to embed Wolfram Cloud notebook:', err);
+                  container.innerHTML = `<div class="p-6 text-center text-xs font-mono text-neutral-500">
+                    <p class="mb-2">Unable to load interactive Wolfram embed directly.</p>
+                    <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-red-600 dark:text-red-400 underline">Open in Wolfram Cloud &rarr;</a>
+                  </div>`;
+                });
+              }
+            }
+          }, { rootMargin: '200px' });
+
+          observer.observe(card);
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initWolframEmbeds);
+      } else {
+        initWolframEmbeds();
+      }
+    </script>
   </body>
 </html>
