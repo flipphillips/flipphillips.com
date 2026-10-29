@@ -60,6 +60,9 @@ npm run images:clean
 
 # Restore moved images back to public/images/
 npm run images:restore
+
+# Nudge Bing, DuckDuckGo & IndexNow search engines with all sitemap URLs after deploy
+npm run seo:nudge
 ```
 
 ---

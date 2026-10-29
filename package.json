@@ -19,7 +19,8 @@
     "images:restore": "node scripts/find-unused-images.js --restore",
     "cv:sync": "node scripts/sync-cv.js",
     "cv:diff": "node scripts/sync-cv.js --diff",
-    "cv:latex": "node scripts/sync-cv.js --latex"
+    "cv:latex": "node scripts/sync-cv.js --latex",
+    "seo:nudge": "node scripts/nudge-search.js"
   },
   "keywords": [],
   "author": "",

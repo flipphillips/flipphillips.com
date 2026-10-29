@@ -9,11 +9,44 @@ const sortedPubs = [...publications].sort((a, b) => b.year - a.year);
 const journalCount = sortedPubs.filter(p => p.type === 'journal').length;
 const confCount = sortedPubs.filter(p => p.type === 'conference').length;
 const highlightCount = sortedPubs.filter(p => p.highlight).length;
+
+const publicationsPageSchema = {
+  "@type": "CollectionPage",
+  "@id": "https://flipphillips.com/publications/#collection",
+  "url": "https://flipphillips.com/publications",
+  "name": "Publications & Research — Flip Phillips",
+  "description": "Peer-reviewed scientific journal articles, conference proceedings, and book chapters by Flip Phillips.",
+  "about": { "@id": "https://flipphillips.com/#person" },
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": sortedPubs.length,
+    "itemListElement": sortedPubs.slice(0, 35).map((pub, idx) => ({
+      "@type": "ListItem",
+      "position": idx + 1,
+      "item": {
+        "@type": "ScholarlyArticle",
+        "@id": `https://flipphillips.com/publications#${pub.id}`,
+        "headline": pub.title,
+        "name": pub.title,
+        "datePublished": String(pub.year),
+        "author": pub.authors.map(a => ({
+          "@type": "Person",
+          "name": a,
+          ...(a.toLowerCase().includes('phillips') ? { "@id": "https://flipphillips.com/#person" } : {})
+        })),
+        ...(pub.venue ? { "isPartOf": { "@type": "Periodical", "name": pub.venue } } : {}),
+        ...(pub.doi ? { "sameAs": pub.doi.startsWith('http') ? pub.doi : `https://doi.org/${pub.doi}` } : {}),
+        ...(pub.pdf ? { "url": `https://flipphillips.com${pub.pdf}` } : {})
+      }
+    }))
+  }
+};
 ---
 
 <BaseLayout
   title="Publications & Research — Flip Phillips"
-  description="Peer-reviewed scientific journal articles, conference proceedings, and book chapters by Flip Phillips."
+  description="Peer-reviewed scientific journal articles, conference proceedings, and book chapters by Flip Phillips across visual and haptic perception, 3D shape, materials, and computer graphics."
+  jsonLd={publicationsPageSchema}
 >
   <div class="py-6">
     <header class="mb-10 pb-6 border-b border-neutral-200 dark:border-neutral-800">
@@ -46,6 +79,14 @@ const highlightCount = sortedPubs.filter(p => p.highlight).length;
           class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 font-medium transition-colors"
         >
           🎓 Google Scholar Profile &rarr;
+        </a>
+        <a
+          href="https://orcid.org/0000-0002-7281-8958"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-neutral-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 font-medium transition-colors"
+        >
+          🆔 ORCID &rarr;
         </a>
         <a
           href="https://neurotree.org/neurotree/tree.php?pid=16082"

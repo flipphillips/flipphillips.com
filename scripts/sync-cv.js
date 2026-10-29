@@ -131,14 +131,10 @@ async function main() {
     return;
   }
 
-  // Default: sync publications.bib to ~/GitHub/fpcv/publications.bib and public/publications.bib
-  console.log(`\n🔄 Syncing publications.bib with ~/GitHub/fpcv and public/...`);
+  // Default: sync publications.bib to ~/GitHub/fpcv/publications.bib
+  console.log(`\n🔄 Syncing publications.bib with ~/GitHub/fpcv...`);
   fs.writeFileSync(targetBibPath, bibContent, 'utf-8');
   console.log(`✅ Copied src/data/publications.bib -> ${targetBibPath} (${pubs.length} entries)`);
-  
-  const publicBibPath = path.join(rootDir, 'public', 'publications.bib');
-  fs.writeFileSync(publicBibPath, bibContent, 'utf-8');
-  console.log(`✅ Copied src/data/publications.bib -> ${publicBibPath}`);
 
   // Also check if me.bib exists and offer info
   if (fs.existsSync(targetMeBibPath)) {

@@ -19,9 +19,18 @@ const featuredFolklore = folklorePosts.slice(0, 4);
 // Homepage Selected Works: driven by the 'highlight: true' ("✦ Selected Work") flag
 const highlightedPubs = publications.filter(p => p.highlight);
 const recentPubs = (highlightedPubs.length > 0 ? highlightedPubs : publications).slice(0, 4);
+
+const homePageSchema = {
+  "@type": "ProfilePage",
+  "@id": "https://flipphillips.com/#profilepage",
+  "url": "https://flipphillips.com/",
+  "name": "Flip Phillips — Professor of Motion Picture Science at RIT",
+  "mainEntity": { "@id": "https://flipphillips.com/#person" },
+  "about": { "@id": "https://flipphillips.com/#person" }
+};
 ---
 
-<BaseLayout>
+<BaseLayout type="profile" jsonLd={homePageSchema}>
   <!-- Dynamic Historical Artifact Banner -->
   <RandomBanner />
 
@@ -83,7 +92,8 @@ const recentPubs = (highlightedPubs.length > 0 ? highlightedPubs : publications)
           </li>
           <li><strong>Lab GitHub:</strong> <a href="https://github.com/ritmps" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">github.com/ritmps</a></li>
           <li><strong>Personal GitHub:</strong> <a href="https://github.com/flipphillips" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">github.com/flipphillips</a></li>
-          <li><strong>Scholarship:</strong> <a href="https://scholar.google.com/citations?user=b9u-pTsAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">Google Scholar</a> &bull; <a href="https://neurotree.org/neurotree/tree.php?pid=16082" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">Neurotree</a></li>
+          <li><strong>Scholarship:</strong> <a href="https://scholar.google.com/citations?user=b9u-pTsAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">Google Scholar</a> &bull; <a href="https://orcid.org/0000-0002-7281-8958" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">ORCID</a> &bull; <a href="https://neurotree.org/neurotree/tree.php?pid=16082" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">Neurotree</a></li>
+          <li><strong>Social:</strong> <a href="https://bsky.app/profile/flipphillips.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">Bluesky</a> &bull; <a href="https://www.linkedin.com/in/flipphillips" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline">LinkedIn</a></li>
           <li><strong>Current Courses:</strong> Virtual Production I & II, Intro to Imaging</li>
           <li><strong>Music:</strong> <a href="https://drums.flipphillips.com" class="text-blue-600 dark:text-blue-400 hover:underline">History of Jazz Drumming</a></li>
           <li class="pt-2 italic text-neutral-500 font-mono text-[11px]">“Part machine — titanium, Dacron, and cow”</li>

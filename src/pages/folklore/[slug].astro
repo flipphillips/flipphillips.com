@@ -29,9 +29,86 @@ const linkedPub = publications.find(p =>
   (p.post && (p.post.includes(slug) || p.post.endsWith(`/${slug}`)))
 );
 const pubDoiUrl = linkedPub?.doi ? (linkedPub.doi.startsWith('http') ? linkedPub.doi : `https://doi.org/${linkedPub.doi}`) : null;
+
+// Extract featured image or first markdown image for OpenGraph & Schema.org
+const imgMatch = post.body?.match(/!\[.*?\]\((.*?)\)/);
+const rawPostImage = post.data.featuredImage || post.data.image || linkedPub?.image || (imgMatch ? imgMatch[1] : null);
+const postImage = rawPostImage ? rawPostImage.replace(/\?ssl=1$/, '') : null;
+
+const postUrl = `https://flipphillips.com/folklore/${slug}`;
+const cleanExcerpt = (post.data.excerpt || '')
+  .replace(/\[Read More\]\(.*?\)/gi, '')
+  .replace(/\[Read More\].*$/gi, '')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+const blogPostingSchema: Record<string, any> = {
+  "@type": "BlogPosting",
+  "@id": `${postUrl}#article`,
+  "mainEntityOfPage": postUrl,
+  "headline": post.data.title,
+  "description": cleanExcerpt || `${post.data.title} — by Flip Phillips`,
+  "url": postUrl,
+  "author": { "@id": "https://flipphillips.com/#person" },
+  "publisher": { "@id": "https://flipphillips.com/#person" },
+  ...(post.data.date ? { "datePublished": new Date(post.data.date).toISOString() } : {}),
+  ...(post.data.modified || post.data.date ? { "dateModified": new Date(post.data.modified || post.data.date).toISOString() } : {}),
+  ...(postImage ? { "image": postImage.startsWith('http') ? postImage : `https://flipphillips.com${postImage}` } : {}),
+  ...(post.data.tags && post.data.tags.length > 0 ? { "keywords": post.data.tags.join(', ') } : {}),
+  ...(post.data.categories && post.data.categories.length > 0 ? { "articleSection": post.data.categories } : {}),
+};
+
+const jsonLdNodes: Record<string, any>[] = [blogPostingSchema];
+const extraMeta: Array<{ name: string; content: string }> = [];
+
+if (linkedPub) {
+  const scholarlySchema: Record<string, any> = {
+    "@type": "ScholarlyArticle",
+    "@id": `${postUrl}#publication`,
+    "headline": linkedPub.title,
+    "name": linkedPub.title,
+    "datePublished": String(linkedPub.year),
+    "author": linkedPub.authors.map(a => ({
+      "@type": "Person",
+      "name": a,
+      ...(a.toLowerCase().includes('phillips') ? { "@id": "https://flipphillips.com/#person" } : {})
+    })),
+    ...(linkedPub.venue ? { "isPartOf": { "@type": "Periodical", "name": linkedPub.venue } } : {}),
+    ...(pubDoiUrl ? { "sameAs": pubDoiUrl } : {}),
+    ...(linkedPub.pdf ? { "url": `https://flipphillips.com${linkedPub.pdf}` } : {}),
+  };
+  blogPostingSchema.about = { "@id": `${postUrl}#publication` };
+  jsonLdNodes.push(scholarlySchema);
+
+  extraMeta.push({ name: 'citation_title', content: linkedPub.title });
+  for (const author of linkedPub.authors) {
+    extraMeta.push({ name: 'citation_author', content: author });
+  }
+  extraMeta.push({ name: 'citation_publication_date', content: String(linkedPub.year) });
+  if (linkedPub.venue) {
+    extraMeta.push({ name: 'citation_journal_title', content: linkedPub.venue });
+  }
+  if (linkedPub.doi) {
+    extraMeta.push({ name: 'citation_doi', content: linkedPub.doi });
+  }
+  if (linkedPub.pdf) {
+    extraMeta.push({ name: 'citation_pdf_url', content: `https://flipphillips.com${linkedPub.pdf}` });
+  }
+}
 ---
 
-<BaseLayout title={`${post.data.title} — Folklore — Flip Phillips`} description={post.data.excerpt}>
+<BaseLayout
+  title={`${post.data.title} — Folklore — Flip Phillips`}
+  description={cleanExcerpt || `${post.data.title} — Archival story and research notes by Flip Phillips.`}
+  image={postImage}
+  imageAlt={post.data.title}
+  type="article"
+  publishedTime={post.data.date}
+  modifiedTime={post.data.modified || post.data.date}
+  tags={post.data.tags || []}
+  jsonLd={jsonLdNodes}
+  extraMeta={extraMeta}
+>
   <article class="max-w-3xl mx-auto py-6" data-pagefind-filter="type:Folklore">
     <!-- Header -->
     <header class="mb-10 pb-8 border-b border-neutral-200 dark:border-neutral-800">

@@ -8,3 +8,4 @@ export type { Publication };
  * `src/data/publications.bib`.
  */
 export const publications: Publication[] = parsePublicationsFromBib(bibRaw);
+

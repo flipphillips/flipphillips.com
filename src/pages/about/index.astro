@@ -1,8 +1,23 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const aboutPageSchema = {
+  "@type": "ProfilePage",
+  "@id": "https://flipphillips.com/about/#profilepage",
+  "url": "https://flipphillips.com/about",
+  "name": "About Flip Phillips — Professor of Motion Picture Science at RIT",
+  "description": "Biography, career trajectory at Ohio State CGRG, Pixar Animation Studios, Skidmore College, and Rochester Institute of Technology (RIT), awards, and disambiguation.",
+  "mainEntity": { "@id": "https://flipphillips.com/#person" },
+  "about": { "@id": "https://flipphillips.com/#person" }
+};
 ---
 
-<BaseLayout title="About — Flip Phillips" description="Bio, career trajectory, appointments, and research background of Flip Phillips.">
+<BaseLayout
+  title="About Flip Phillips — Professor of Motion Picture Science at RIT"
+  description="Biography, career trajectory (OSU CGRG, Pixar RenderMan, Skidmore, RIT), research background, and disambiguation of Flip Phillips."
+  type="profile"
+  jsonLd={aboutPageSchema}
+>
   <div class="py-6 max-w-3xl mx-auto">
     <header class="mb-10 pb-6 border-b border-neutral-200 dark:border-neutral-800">
       <h1 class="text-3xl md:text-5xl font-serif font-bold text-neutral-900 dark:text-neutral-50 tracking-tight leading-tight">
@@ -56,12 +71,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
       <h2>Editorial, Memberships & Service</h2>
       <p>
-        Phillips is a past editor of the <em>Mathematica Journal</em>, which focuses on computational mathematics across science, art, and modeling. He was inducted into the <strong>Visual Effects Society (VES)</strong> in 2025 and is an active member of the <strong>Vision Sciences Society (VSS)</strong>. He is also honored to be associated with <strong>Project Prakash</strong>, restoring sight to congenitally blind children and studying early sensory learning.
+        Phillips is a past editor of the <em>Mathematica Journal</em>, which focuses on computational mathematics across science, art, and modeling. In 2023, he and his former Pixar colleagues were honored with an <strong>IEEE Milestone Award</strong> for their pioneering work creating <em>RenderMan</em>. He was inducted into the <strong>Visual Effects Society (VES)</strong> in 2025 and is an active member of the <strong>Vision Sciences Society (VSS)</strong>. He is also honored to be associated with <strong>Project Prakash</strong>, restoring sight to congenitally blind children and studying early sensory learning.
       </p>
 
-      <h2>Machine Body & Extracurriculars</h2>
+      <h2>Machine Body, Drumming &amp; Disambiguation</h2>
       <p>
-        He is thankful to be part machine — <em>titanium, Dacron, and cow</em>. In his spare time, he can be found chopping out book reports and paradiddle-diddles on the snare with the Avant Garde Alumni Drumline, and documenting the history of drumming at <a href="https://drums.flipphillips.com" target="_blank">drums.flipphillips.com</a>.
+        He is thankful to be part machine — <em>titanium, Dacron, and cow</em>. In his spare time, he can be found chopping out book reports and paradiddle-diddles on the snare with the Avant Garde Alumni Drumline, and documenting the history of drumming at <a href="https://drums.flipphillips.com" target="_blank" rel="noopener noreferrer">drums.flipphillips.com</a>.
+      </p>
+      <p class="text-base text-neutral-600 dark:text-neutral-400 italic">
+        <strong>A note on the name:</strong> If you arrived here looking for the legendary late jazz tenor saxophonist <strong>Flip Phillips</strong> (Joseph Edward Filipelli, 1915–2001) of Woody Herman’s First Herd and Jazz at the Philharmonic — I am not him, nor are we related. To complicate matters for search engines everywhere, my father was <em>also</em> named <strong>Flip Phillips</strong> and was a jazz musician, though he, like me, was a drummer.
       </p>
 
       <div class="my-8 p-6 rounded-2xl bg-neutral-50 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 not-prose">
@@ -97,12 +115,28 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             🎓 Google Scholar
           </a>
           <a
+            href="https://orcid.org/0000-0002-7281-8958"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-4 py-2 rounded-lg text-xs font-mono font-semibold border border-neutral-300 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+          >
+            🆔 ORCID (0000-0002-7281-8958)
+          </a>
+          <a
             href="https://neurotree.org/neurotree/tree.php?pid=16082"
             target="_blank"
             rel="noopener noreferrer"
             class="px-4 py-2 rounded-lg text-xs font-mono font-semibold border border-neutral-300 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
           >
             🌳 Academic Lineage (Neurotree)
+          </a>
+          <a
+            href="https://www.linkedin.com/in/flipphillips"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-4 py-2 rounded-lg text-xs font-mono font-semibold border border-neutral-300 dark:border-neutral-700 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+          >
+            💼 LinkedIn
           </a>
         </div>
       </div>

@@ -103,6 +103,13 @@
       "problemMatcher": [],
       "label": "Astro: Build Search Index (Pagefind)",
       "detail": "Re-index site content for instant local search in dev mode"
+    },
+    {
+      "type": "npm",
+      "script": "seo:nudge",
+      "problemMatcher": [],
+      "label": "SEO: Nudge Search Engines (IndexNow & Sitemap)",
+      "detail": "Pushes all 148 canonical URLs from sitemap.xml to Bing, DuckDuckGo, and IndexNow partners"
     }
   ]
 }

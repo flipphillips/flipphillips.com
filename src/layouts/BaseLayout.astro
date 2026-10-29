@@ -6,12 +6,185 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title?: string;
   description?: string;
+  image?: string | null;
+  imageAlt?: string;
+  type?: 'website' | 'article' | 'profile';
+  publishedTime?: string;
+  modifiedTime?: string;
+  tags?: string[];
+  jsonLd?: Record<string, any> | Record<string, any>[];
+  extraMeta?: Array<{ name: string; content: string }>;
+  noindex?: boolean;
 }
+
+const SITE_URL = 'https://flipphillips.com';
 
 const {
   title = "Flip Phillips — Professor of Motion Picture Science",
-  description = "Research and teaching in human perception, 3D shape, materials, computer graphics, and motion at the Rochester Institute of Technology."
+  description = "Flip Phillips is Professor of Motion Picture Science at the Rochester Institute of Technology (RIT), perceptual scientist, and early Pixar Animation Studios 'Animation Scientist' (RenderMan). Research in human perception of 3D shape, materials, computer graphics, and motion.",
+  image = "/images/uploads/2017/03/L1000017.jpg",
+  imageAlt = "Flip Phillips — Professor of Motion Picture Science at Rochester Institute of Technology",
+  type = "website",
+  publishedTime,
+  modifiedTime,
+  tags = [],
+  jsonLd,
+  extraMeta = [],
+  noindex = false,
 } = Astro.props;
+
+// Clean any legacy "[Read More](...)" suffix from post excerpts
+const cleanDescription = (description || '')
+  .replace(/\[Read More\]\(.*?\)/gi, '')
+  .replace(/\[Read More\].*$/gi, '')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site || SITE_URL).toString();
+const ogImageUrl = image
+  ? (image.startsWith('http') ? image : new URL(image, Astro.site || SITE_URL).toString())
+  : new URL('/images/uploads/2017/03/L1000017.jpg', Astro.site || SITE_URL).toString();
+
+const personEntity = {
+  "@type": "Person",
+  "@id": `${SITE_URL}/#person`,
+  "name": "Flip Phillips",
+  "givenName": "Flip",
+  "familyName": "Phillips",
+  "alternateName": ["F. Phillips", "F. H. Phillips"],
+  "honorificPrefix": "Prof.",
+  "honorificSuffix": "Ph.D.",
+  "jobTitle": "Professor of Motion Picture Science",
+  "description": "Professor of Motion Picture Science at the Rochester Institute of Technology (MAGIC Center, School of Film and Animation, and Center for Imaging Science), perceptual psychologist, early Pixar Animation Studios 'Animation Scientist' (RenderMan team), and jazz drummer.",
+  "disambiguatingDescription": "American perceptual scientist, computer graphics pioneer, early Pixar 'Animation Scientist', Professor of Motion Picture Science at Rochester Institute of Technology (RIT), and drummer. Son of jazz drummer Flip Phillips; not related to and not to be confused with the late jazz tenor saxophonist Flip Phillips (Joseph Edward Filipelli, 1915–2001).",
+  "url": SITE_URL,
+  "image": {
+    "@type": "ImageObject",
+    "@id": `${SITE_URL}/#portrait`,
+    "url": `${SITE_URL}/images/uploads/2017/03/L1000017.jpg`,
+    "caption": "Flip Phillips portrait by Roland Fleming"
+  },
+  "email": "mailto:flip.phillips@rit.edu",
+  "worksFor": {
+    "@type": "CollegeOrUniversity",
+    "name": "Rochester Institute of Technology",
+    "alternateName": "RIT",
+    "url": "https://www.rit.edu",
+    "department": [
+      {
+        "@type": "Organization",
+        "name": "School of Film and Animation (SoFA)",
+        "url": "https://www.rit.edu/artdesign/school-film-and-animation"
+      },
+      {
+        "@type": "Organization",
+        "name": "Chester F. Carlson Center for Imaging Science (CIS)",
+        "url": "https://www.rit.edu/science/chester-f-carlson-center-imaging-science"
+      },
+      {
+        "@type": "Organization",
+        "name": "MAGIC Center",
+        "url": "https://www.rit.edu/magic"
+      }
+    ]
+  },
+  "affiliation": [
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "Rochester Institute of Technology",
+      "url": "https://www.rit.edu"
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "Skidmore College",
+      "description": "Former Professor of Psychology and Neuroscience"
+    },
+    {
+      "@type": "Corporation",
+      "name": "Pixar Animation Studios",
+      "description": "Original 'Animation Scientist' and Technical Director (1987–1992), RenderMan development team"
+    }
+  ],
+  "alumniOf": [
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "The Ohio State University",
+      "department": "Computer Graphics Research Group (CGRG) & Department of Psychology",
+      "url": "https://www.osu.edu"
+    }
+  ],
+  "memberOf": [
+    {
+      "@type": "Organization",
+      "name": "Visual Effects Society (VES)"
+    },
+    {
+      "@type": "Organization",
+      "name": "Vision Sciences Society (VSS)"
+    },
+    {
+      "@type": "Organization",
+      "name": "Project Prakash"
+    }
+  ],
+  "award": [
+    "IEEE Milestone Award for Pixar RenderMan (2023)",
+    "Visual Effects Society (VES) Member (2025)"
+  ],
+  "knowsAbout": [
+    "Visual Perception",
+    "Haptic Perception",
+    "3D Shape Perception",
+    "Material Perception",
+    "Computer Graphics",
+    "Computer Animation",
+    "RenderMan",
+    "Motion Picture Science",
+    "Virtual Production",
+    "Psychophysics",
+    "Cognitive Psychology",
+    "Neuroscience",
+    "Wolfram Mathematica",
+    "Jazz Drumming"
+  ],
+  "sameAs": [
+    "https://orcid.org/0000-0002-7281-8958",
+    "https://scholar.google.com/citations?user=b9u-pTsAAAAJ&hl=en",
+    "https://www.linkedin.com/in/flipphillips",
+    "https://github.com/flipphillips",
+    "https://github.com/ritmps",
+    "https://github.com/skidvision",
+    "https://bsky.app/profile/flipphillips.com",
+    "https://neurotree.org/neurotree/tree.php?pid=16082",
+    "https://www.rit.edu/directory/fxpppr-flip-phillips",
+    "https://drums.flipphillips.com"
+  ]
+};
+
+const websiteEntity = {
+  "@type": "WebSite",
+  "@id": `${SITE_URL}/#website`,
+  "url": SITE_URL,
+  "name": "Flip Phillips",
+  "alternateName": "Flip Phillips — Professor of Motion Picture Science at RIT",
+  "description": "Research, publications, software, and computer graphics folklore of Flip Phillips, Professor of Motion Picture Science at the Rochester Institute of Technology.",
+  "publisher": { "@id": `${SITE_URL}/#person` },
+  "author": { "@id": `${SITE_URL}/#person` },
+  "inLanguage": "en-US"
+};
+
+const extraJsonLdNodes = jsonLd
+  ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd])
+  : [];
+
+const schemaGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    personEntity,
+    websiteEntity,
+    ...extraJsonLdNodes
+  ]
+};
 ---
 
 <!DOCTYPE html>
@@ -19,11 +192,66 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
+    <meta name="description" content={cleanDescription} />
+    <meta name="author" content="Flip Phillips" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+    <!-- Identity & IndieWeb rel="me" verification links -->
+    <link rel="me" href="https://orcid.org/0000-0002-7281-8958" />
+    <link rel="me" href="https://github.com/flipphillips" />
+    <link rel="me" href="https://bsky.app/profile/flipphillips.com" />
+    <link rel="me" href="https://www.linkedin.com/in/flipphillips" />
+    <link rel="me" href="https://scholar.google.com/citations?user=b9u-pTsAAAAJ&hl=en" />
+
+    <!-- OpenGraph Metadata -->
+    <meta property="og:site_name" content="Flip Phillips" />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={cleanDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta property="og:locale" content="en_US" />
+    {type === 'profile' && (
+      <>
+        <meta property="profile:first_name" content="Flip" />
+        <meta property="profile:last_name" content="Phillips" />
+        <meta property="profile:username" content="flipphillips" />
+      </>
+    )}
+    {type === 'article' && publishedTime && (
+      <meta property="article:published_time" content={new Date(publishedTime).toISOString()} />
+    )}
+    {type === 'article' && modifiedTime && (
+      <meta property="article:modified_time" content={new Date(modifiedTime).toISOString()} />
+    )}
+    {type === 'article' && (
+      <meta property="article:author" content="Flip Phillips" />
+    )}
+    {type === 'article' && tags.map((tag) => (
+      <meta property="article:tag" content={tag} />
+    ))}
+
+    <!-- Twitter / Bluesky / Social Card Metadata -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={cleanDescription} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+
+    {extraMeta.map((m) => (
+      <meta name={m.name} content={m.content} />
+    ))}
+
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/favicon.png" />
     <title>{title}</title>
+
+    <!-- Structured Data (Schema.org JSON-LD for Google/Bing Knowledge Graph & Disambiguation) -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />
 
     <!-- Google Fonts: IBM Plex Family (Sans, Serif, Mono) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
