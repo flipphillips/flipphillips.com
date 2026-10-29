@@ -12,12 +12,21 @@ excerpt: "I notice that I seem to generate a lot of images while doing analysis,
 
 I notice that I seem to generate a lot of images while doing analysis, largely using Wolfram Research’s _[Mathematica](http://www.wolfram.com)_…
 
-[![Marroquin Pattern](/images/uploads/2014/03/MarroquinPatternGenerator-258x300.png)](/images/uploads/2014/03/MarroquinPatternGenerator.png)
+[![Marroquin Pattern](/images/uploads/2014/03/MarroquinPatternGenerator.png)](/images/uploads/2014/03/MarroquinPatternGenerator.png)
 
 so, maybe every day I should post one of those images here- an image of something I’m working on, an “Image of the Day” (IotD) or some such.
 
-This is a “Marroquin Pattern” used by, amazingly enough, Marroquin, to study top-down perceptual phenomena. It’s an interactive _Mathematica_ CDF, but here’s an image.
+This is a “Marroquin Pattern” used by, amazingly enough, Marroquin, to study top-down perceptual phenomena. 
 
-If you’d like the CDF, just let me know and you can play around with the patterns yourself.
+## Interactive Version
+
+Here, on Wolfram Cloud, you can manipulate it yourself —
+
+![Marroquin Pattern Generator](https://www.wolframcloud.com/obj/flip/MarroquinPatternGenerator)
+
+
+* * *
+
+## Reference
 
 [Marroquín, J. L. (1976). _Human Visual Perception of Structure_.](http://dspace.mit.edu/handle/1721.1/27482)
