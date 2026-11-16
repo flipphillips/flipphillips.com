@@ -2,11 +2,12 @@
 title: "A NeRF in Wolfram Language"
 date: "2026-11-16T22:20:22"
 slug: "a-nerf-in-wolfram-language"
-categories: ["Dispatches"]
-tags: ["nerf", "graphics", "mathematica", "wl", "mma"]
-isFolklore: false
+categories: ["Folklore", "Dispatches"]
+tags: ["folklore", "nerf", "graphics", "mathematica", "wl", "mma"]
+isFolklore: true
+publication: "wl-nerf-2026"
 featuredImage: "/images/wlnerf.jpg"
-excerpt: "Implement a NeRF directly in Wolfram Language"
+excerpt: "Training a Neural Radiance Field directly in Wolfram Language from scratch."
 ---
 
 ![A NeRF in Wolfram Language](/images/wlnerf.jpg)
