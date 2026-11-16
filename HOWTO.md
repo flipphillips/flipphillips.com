@@ -18,8 +18,10 @@ You do **not** need to memorize or type shell commands in the terminal. All auth
 | **`Astro: Preview Build`** | Inspects the compiled static `./dist` files locally before deploying |
 | **`Astro: New Post / Folklore Story`** | Interactively scaffolds a new Folklore story or Dispatch in `src/content/posts/` |
 | **`Astro: Add Publication (via DOI)`** | Fetches publication metadata by DOI and adds to `src/data/publications.bib` |
-| **`CV: Sync Publications to ~/GitHub/fpcv`** | Syncs `publications.bib` directly to `~/GitHub/fpcv/publications.bib` |
-| **`CV: Check Differences with cv.tex`** | Compares `publications.bib` against `fpcv/cv.tex` to find missing entries |
+| **`CV: Bidirectional Sync (Website <-> ~/GitHub/fpcv)`** | Merges new and edited entries bidirectionally between `publications.bib` and `~/GitHub/fpcv` |
+| **`CV: Pull from ~/GitHub/fpcv to Website`** | Pulls entries and metadata updates from `fpcv` into `publications.bib` (preserving web tags) |
+| **`CV: Push from Website to ~/GitHub/fpcv`** | Pushes website `publications.bib` to `~/GitHub/fpcv/publications.bib` |
+| **`CV: Check Differences with cv.tex`** | Compares `publications.bib` against `fpcv/publications.bib` and `cv.tex` |
 | **`CV: Generate Formatted LaTeX for cv.tex`** | Formats publications into the exact `\yearsheader{}` LaTeX macro format for `cv.tex` |
 | **`Astro: Check Image Sizes (Dry Run)`** | Scans `public/images/` and reports oversized photos & potential space savings |
 | **`Astro: Optimize Images (In-Place)`** | Safely resizes & compresses backlog photos down to 2,048px retina masters |
