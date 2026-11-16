@@ -10,6 +10,7 @@ const KNOWN_COMMUNITY_TOPICS = {
     description: 'Selected by the Wolfram Editorial Board for Staff Picks and Publication Materials.',
     notebookUrl: 'https://www.wolframcloud.com/obj/c19ba5bf-c364-46f4-b009-f06a27c122e0',
     downloadUrl: 'https://community.wolfram.com/uploads/short-url/ph9lHENjEcaz6OKGY52d9z5dgrR.nb',
+    githubUrl: 'https://github.com/ritmps/WLNeRFLite',
   },
 };
 
@@ -41,6 +42,7 @@ function createWolframCommunityCard(url, customTitle) {
   const description = known.description || 'Wolfram Community Discussion & Publication Materials';
   const notebookUrl = known.notebookUrl || null;
   const downloadUrl = known.downloadUrl || null;
+  const githubUrl = known.githubUrl || null;
 
   const actionButtons = [
     {
@@ -57,6 +59,22 @@ function createWolframCommunityCard(url, customTitle) {
       ],
     },
   ];
+
+  if (githubUrl) {
+    actionButtons.push({
+      type: 'element',
+      tagName: 'a',
+      properties: {
+        href: githubUrl,
+        target: '_blank',
+        rel: 'noopener noreferrer',
+        class: 'px-3.5 py-1.5 rounded-lg border border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-600 text-neutral-800 dark:text-neutral-200 inline-flex items-center gap-1.5 font-medium transition-colors',
+      },
+      children: [
+        { type: 'text', value: 'GitHub (WLNeRFLite) ↗' },
+      ],
+    });
+  }
 
   if (notebookUrl) {
     actionButtons.push({

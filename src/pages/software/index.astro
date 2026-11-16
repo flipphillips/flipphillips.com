@@ -88,37 +88,74 @@ import ModelViewer3D from '../../components/ModelViewer3D.astro';
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900">
-          <div class="flex items-center justify-between text-xs font-mono text-neutral-400 mb-2">
-            <span>Hardware & Vision</span>
-            <span class="text-blue-500 font-semibold">Active</span>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono text-neutral-400 mb-2">
+              <span>Hardware & Vision</span>
+              <span class="text-blue-500 font-semibold">Active</span>
+            </div>
+            <h3 class="text-lg font-serif font-bold text-neutral-900 dark:text-neutral-100">
+              OpenVolCap / ChumpCam
+            </h3>
+            <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed font-sans">
+              Affordable, flexible open-source devices and sensor arrays for volumetric capture, motion capture, and camera tracking in virtual production.
+            </p>
           </div>
-          <h3 class="text-lg font-serif font-bold text-neutral-900 dark:text-neutral-100">
-            OpenVolCap / ChumpCam
-          </h3>
-          <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed font-sans">
-            Affordable, flexible open-source devices and sensor arrays for volumetric capture, motion capture, and camera tracking in virtual production.
-          </p>
-          <a href="https://ritmps.github.io/chumps/" target="_blank" class="inline-block mt-4 text-xs font-mono font-semibold text-blue-600 dark:text-blue-400 hover:underline">
-            Visit Project Site (ritmps.github.io/chumps) &rarr;
-          </a>
+          <div class="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex flex-wrap gap-x-3 gap-y-1.5 text-xs font-mono">
+            <a href="https://ritmps.github.io/chumps/" target="_blank" class="font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+              Project Site &rarr;
+            </a>
+            <a href="https://github.com/ritmps/chumps" target="_blank" class="text-neutral-500 dark:text-neutral-400 hover:underline">
+              GitHub &rarr;
+            </a>
+          </div>
         </div>
 
-        <div class="p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900">
-          <div class="flex items-center justify-between text-xs font-mono text-neutral-400 mb-2">
-            <span>Developer Tooling</span>
-            <span class="text-neutral-400">VSCode Extension</span>
+        <div class="p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono text-neutral-400 mb-2">
+              <span>Neural Rendering</span>
+              <span class="px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950/70 border border-amber-300/80 dark:border-amber-800/60 text-amber-800 dark:text-amber-300 font-sans font-medium text-[11px]">★ Staff Pick</span>
+            </div>
+            <h3 class="text-lg font-serif font-bold text-neutral-900 dark:text-neutral-100">
+              Wolfram Language NeRF (WL-NeRF)
+            </h3>
+            <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed font-sans">
+              From-scratch implementation of Neural Radiance Fields in pure Wolfram Language with volumetric raymarching, positional frequency encodings, and novel-view synthesis.
+            </p>
           </div>
-          <h3 class="text-lg font-serif font-bold text-neutral-900 dark:text-neutral-100">
-            VSCode for Wolfram Mathematica
-          </h3>
-          <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed font-sans">
-            Language integration, syntax highlighting, and execution tooling for Wolfram Language development within Visual Studio Code.
-          </p>
-          <a href="https://github.com/flipphillips" target="_blank" class="inline-block mt-4 text-xs font-mono font-semibold text-blue-600 dark:text-blue-400 hover:underline">
-            Repository &rarr;
-          </a>
+          <div class="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex flex-wrap gap-x-3 gap-y-1.5 text-xs font-mono">
+            <a href="https://github.com/ritmps/WLNeRFLite" target="_blank" class="font-semibold text-neutral-900 dark:text-neutral-100 hover:underline">
+              GitHub &rarr;
+            </a>
+            <a href="https://community.wolfram.com/t/training-a-neural-radiance-field-nerf-from-scratch-in-wolfram-language-the-classic-lego-bulldozer/28600" target="_blank" class="font-semibold text-red-600 dark:text-red-400 hover:underline">
+              Staff Pick &rarr;
+            </a>
+            <a href="/folklore/a-nerf-in-wolfram-language" class="font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+              Dispatch &rarr;
+            </a>
+          </div>
+        </div>
+
+        <div class="p-6 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-xs font-mono text-neutral-400 mb-2">
+              <span>Developer Tooling</span>
+              <span class="text-neutral-400">VSCode Extension</span>
+            </div>
+            <h3 class="text-lg font-serif font-bold text-neutral-900 dark:text-neutral-100">
+              VSCode for Wolfram Mathematica
+            </h3>
+            <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-300 leading-relaxed font-sans">
+              Language integration, syntax highlighting, and execution tooling for Wolfram Language development within Visual Studio Code.
+            </p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-neutral-100 dark:border-neutral-800/80 flex flex-wrap gap-x-3 gap-y-1.5 text-xs font-mono">
+            <a href="https://github.com/flipphillips" target="_blank" class="font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+              Repository &rarr;
+            </a>
+          </div>
         </div>
       </div>
     </section>
