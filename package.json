@@ -18,6 +18,8 @@
     "images:clean": "node scripts/find-unused-images.js --move",
     "images:restore": "node scripts/find-unused-images.js --restore",
     "cv:sync": "node scripts/sync-cv.js",
+    "cv:pull": "node scripts/sync-cv.js --pull",
+    "cv:push": "node scripts/sync-cv.js --push",
     "cv:diff": "node scripts/sync-cv.js --diff",
     "cv:latex": "node scripts/sync-cv.js --latex",
     "seo:nudge": "node scripts/nudge-search.js"

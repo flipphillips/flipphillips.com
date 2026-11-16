@@ -75,30 +75,39 @@ npm run new:pub
 ---
 
 ### 3. Synchronizing Publications with Your Paper CV (`fpcv`)
-The website and your LaTeX CV repository (`~/GitHub/fpcv`) share the exact same bibliography data.
+The website and your LaTeX CV repository (`~/GitHub/fpcv`) share the exact same bibliography data and synchronize bidirectionally.
 
 Run via **Terminal &rarr; Run Task...** or via npm scripts:
 ```bash
-# 1. Sync publications.bib to ~/GitHub/fpcv/publications.bib
+# 1. Bidirectional 2-way sync (merges new/edited entries between website and fpcv)
 npm run cv:sync
 
-# 2. Compare publications.bib against ~/GitHub/fpcv/cv.tex
+# 2. Pull updates from ~/GitHub/fpcv into the website (preserves website metadata)
+npm run cv:pull
+
+# 3. Push website publications.bib out to ~/GitHub/fpcv
+npm run cv:push
+
+# 4. Compare publications.bib against ~/GitHub/fpcv/publications.bib & cv.tex
 npm run cv:diff
 
-# 3. Generate ready-to-paste LaTeX entries in the exact cv.tex macro style
+# 5. Generate ready-to-paste LaTeX entries in the exact cv.tex macro style
 npm run cv:latex
 # or generate for a specific year:
 npm run cv:latex 2026
 ```
 
-#### How the LaTeX Formatter Works:
-The `cv:latex` tool formats BibTeX entries directly into your established `cv.tex` conventions:
-- Inserts `\yearsheader{2026}`
-- Formats authors with non-breaking spaces `~` (e.g. `V~Simion, S~Farnand, DL~Long`)
-- Automatically substitutes `\me` for Flip Phillips
-- Uses `\&` for the last author
-- Formats `\emph{Journal Name}`, `vol.\ X, num.\ Y, pp.\ A--B`
-- Adds `\doi{...}` macro links
+#### How Bidirectional Sync Works:
+- **Two-Way Merge (`npm run cv:sync`)**: Unions all entries across both bibliographies. Any new entry added in `fpcv` is added to the website; any entry added to the website is added to `fpcv`.
+- **Metadata Preservation**: Website-specific tags (`pdf`, `image`, `post`, `highlight`, `type`, `typelabel`) are strictly preserved and merged, so editing citation fields in LaTeX or papers tools won't overwrite website thumbnails or post links.
+- **Bibliographic Precedence**: Edits made to standard bibliographic fields (e.g. page numbers, volumes, DOIs) in your LaTeX CV repository propagate to the website.
+- **LaTeX Formatter (`npm run cv:latex`)**: Formats BibTeX entries directly into your established `cv.tex` conventions:
+  - Inserts `\yearsheader{2026}`
+  - Formats authors with non-breaking spaces `~` (e.g. `V~Simion, S~Farnand, DL~Long`)
+  - Automatically substitutes `\me` for Flip Phillips
+  - Uses `\&` for the last author
+  - Formats `\emph{Journal Name}`, `vol.\ X, num.\ Y, pp.\ A--B`
+  - Adds `\doi{...}` macro links
 
 ---
 

@@ -217,3 +217,65 @@ export function parsePublicationsFromBib(bibContent: string): Publication[] {
   return entries.map(bibEntryToPublication).sort((a, b) => b.year - a.year);
 }
 
+export const PREFERRED_FIELD_ORDER = [
+  'title',
+  'author',
+  'journal',
+  'booktitle',
+  'howpublished',
+  'school',
+  'institution',
+  'publisher',
+  'year',
+  'volume',
+  'number',
+  'pages',
+  'doi',
+  'url',
+  'pdf',
+  'image',
+  'post',
+  'highlight',
+  'type',
+  'typelabel',
+];
+
+/**
+ * Format a single BibEntry into clean standard BibTeX with consistent indenting
+ * and canonical field ordering.
+ */
+export function formatBibEntry(entry: BibEntry): string {
+  const lines: string[] = [`@${entry.entryType}{${entry.citeKey},`];
+  const keys = Object.keys(entry.fields);
+
+  keys.sort((a, b) => {
+    const idxA = PREFERRED_FIELD_ORDER.indexOf(a);
+    const idxB = PREFERRED_FIELD_ORDER.indexOf(b);
+    if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+    if (idxA !== -1) return -1;
+    if (idxB !== -1) return 1;
+    return a.localeCompare(b);
+  });
+
+  for (const k of keys) {
+    const v = entry.fields[k];
+    if (v !== undefined && v !== null && v !== '') {
+      lines.push(`  ${k} = {${v}},`);
+    }
+  }
+  lines.push('}');
+  return lines.join('\n');
+}
+
+/**
+ * Serialize an array of BibEntry objects into a full BibTeX file string.
+ */
+export function serializeBibTeX(entries: BibEntry[], headerComment?: string): string {
+  const header =
+    headerComment ||
+    `% Publications bibliography for Flip Phillips\n% Single source of truth for both flipphillips.com and LaTeX CV\n`;
+  const formattedEntries = entries.map(formatBibEntry).join('\n\n');
+  return `${header.trim()}\n\n${formattedEntries}\n`;
+}
+
+

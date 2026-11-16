@@ -45,8 +45,22 @@
       "type": "npm",
       "script": "cv:sync",
       "problemMatcher": [],
-      "label": "CV: Sync Publications to ~/GitHub/fpcv",
-      "detail": "Syncs publications.bib from flipphillips.com to ~/GitHub/fpcv/publications.bib"
+      "label": "CV: Bidirectional Sync (Website <-> ~/GitHub/fpcv)",
+      "detail": "Merges new and edited entries bidirectionally between publications.bib and ~/GitHub/fpcv"
+    },
+    {
+      "type": "npm",
+      "script": "cv:pull",
+      "problemMatcher": [],
+      "label": "CV: Pull from ~/GitHub/fpcv to Website",
+      "detail": "Pulls entries and metadata updates from fpcv into publications.bib (preserving web tags)"
+    },
+    {
+      "type": "npm",
+      "script": "cv:push",
+      "problemMatcher": [],
+      "label": "CV: Push from Website to ~/GitHub/fpcv",
+      "detail": "Pushes website publications.bib to ~/GitHub/fpcv/publications.bib"
     },
     {
       "type": "npm",

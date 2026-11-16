@@ -37,10 +37,14 @@ npm run new:pub 10.1145/3799829.3812522
 # or run interactively for manual entry:
 npm run new:pub
 
-# Sync publications.bib with your paper CV repo (~/GitHub/fpcv)
+# Bidirectional sync between publications.bib and your paper CV repo (~/GitHub/fpcv)
 npm run cv:sync
 
-# Check if any publications in publications.bib are missing from cv.tex
+# Pull entries from fpcv into the website (or push website out to fpcv)
+npm run cv:pull
+npm run cv:push
+
+# Check diffs between website .bib, fpcv .bib, and cv.tex
 npm run cv:diff
 
 # Generate formatted LaTeX entries in the exact cv.tex macro style
